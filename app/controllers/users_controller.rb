@@ -1,5 +1,5 @@
 class UsersController < ApplicationController
-  before_action :set_note, only: [:show]
+  before_action :set_user, only: [:show]
 
   # GET /users
   # GET /users.json
@@ -7,8 +7,8 @@ class UsersController < ApplicationController
     @users = User.all
   end
 
-  # GET /notes/1
-  # GET /notes/1.json
+  # GET /users/1
+  # GET /users/1.json
   def show
   end
 

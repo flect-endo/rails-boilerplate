@@ -17,7 +17,7 @@
     <% @notes.each do |note| %>
       <tr>
         <td><%= link_to note.id, note_path(note) %></td>
-        <td><%= note.user_id %></td>
+        <td><%= note.try(:user).try(:email) || "" %></td>
         <td><%= note.title %></td>
         <td><%= note.body %></td>
         <td><%=l note.created_at %></td>

@@ -1,10 +1,11 @@
 Rails.application.routes.draw do
   mount RailsAdmin::Engine => '/admin', as: 'rails_admin'
-  root 'notes#index'
+  root 'home#index'
 
+  get 'home/index'
   resources :notes
 
-  devise_for :users
+  devise_for :users, path: '', path_names: { sign_in: 'login', sign_out: 'logout' }
 
   resources :users, only: [:index, :show]
 
