@@ -1,0 +1,7 @@
+ja:
+  note:
+    index:
+      title: "aaa"
+  time:
+    formats:
+      default: "%Y-%M-%d"
