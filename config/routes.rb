@@ -5,9 +5,8 @@ Rails.application.routes.draw do
   get 'home/index'
   resources :notes
 
-  devise_for :users, path: '', path_names: { sign_in: 'login', sign_out: 'logout' }
-
-  resources :users, only: [:index, :show]
+  devise_for :users
+  resources :users
 
   resource :authentication_token, only: [:update, :destroy]
 
