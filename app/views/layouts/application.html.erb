@@ -55,11 +55,11 @@
           <% end %>
           <ul class="nav navbar-nav navbar-right">
             <% if user_signed_in? %>
-            <li><%= link_to_glyph "pencil", "Edit account", edit_user_registration_path %></li>
-            <li><%= link_to_glyph "log-out", "Logout", destroy_user_session_path, method: :delete %></li>
+            <li><%= link_to_glyph "pencil", t("helpers.links.edit_account"), edit_user_registration_path %></li>
+            <li><%= link_to_glyph "log-out", t("helpers.links.sign_out"), destroy_user_session_path, method: :delete %></li>
             <% else %>
-            <li><%= link_to_glyph "pencil", "Sign Up", new_user_registration_path %></li>
-            <li><%= link_to_glyph "log-in", "Login", new_user_session_path %></li>
+            <li><%= link_to_glyph "pencil", t("devise.shared.links.sign_up"), new_user_registration_path %></li>
+            <li><%= link_to_glyph "log-in", t("devise.shared.links.sign_in"), new_user_session_path %></li>
             <% end %>
           </ul>
         </div>

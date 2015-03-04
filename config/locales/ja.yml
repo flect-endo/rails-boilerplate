@@ -1,7 +1,52 @@
 ja:
-  note:
-    index:
-      title: "aaa"
   time:
     formats:
-      default: "%Y-%M-%d"
+      default: "%Y/%m/%d %H:%M"
+  button:
+    submti: "登録"
+    create: "作成"
+    update: "変更"
+    destroy: "削除"
+    cancel: "キャンセル"
+  helpers:
+    actions: "アクション"
+    submit:
+      create: "%{model} 新規作成"
+      update: "%{model} 更新"
+    links:
+      edit_account: "アカウント編集"
+      sign_out: "ログアウト"
+      new: "新規作成"
+      back: "戻る"
+      edit: "編集"
+      destroy: "削除"
+  common:
+    attributes:
+      id: &id "ID"
+      created_at: &created_at "作成日時"
+      updated_at: &updated_at "更新日時"
+  notes:
+    index:
+      title: "メモ一覧"
+    new:
+      title: "新規メモ"
+  users:
+    index:
+      title: "ユーザ一覧"
+  activerecord:
+    models:
+      note: "メモ"
+      user: &user "ユーザ"
+    attributes:
+      note:
+        id: *id
+        title: "題名"
+        body: "本文"
+        user_id: *user
+        created_at: *created_at
+        updated_at: *updated_at
+      user:
+        id: *id
+        email: "メールアドレス"
+        created_at: *created_at
+        updated_at: *updated_at
