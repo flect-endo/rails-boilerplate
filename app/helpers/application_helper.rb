@@ -1,6 +1,12 @@
 module ApplicationHelper
   ALERT_TYPES = [:success, :info, :warning, :danger] unless const_defined?(:ALERT_TYPES)
 
+  def link_to_glyph(glyph_class, name, path, options={})
+    link_to path, {}, {} do
+      (content_tag :i, "", class: ["glyphicon", "glyphicon-#{glyph_class}"]) + " " + name
+    end
+  end
+
   def bootstrap_flash(options = {})
     flash_messages = []
     flash.each do |type, message|
