@@ -16,7 +16,8 @@ ja:
     links:
       edit_account: "アカウント編集"
       sign_out: "ログアウト"
-      new: "新規作成"
+      new: "新規"
+      create: "作成"
       back: "戻る"
       edit: "編集"
       destroy: "削除"
