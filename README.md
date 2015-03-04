@@ -1,2 +1,2 @@
 # rails-boilerplate
-Devise + cancancanを使ったシンプルなRailsアプリ
+Devise + cancancan + RSpecを使ったテンプレート用Railsアプリ
