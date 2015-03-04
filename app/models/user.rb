@@ -7,6 +7,9 @@ class User < ActiveRecord::Base
   validates :authentication_token, uniqueness: true, allow_nil: true
   has_many :notes
 
+  # ユーザ登録時に認証トークンを自動生成
+  after_create :ensure_authentication_token
+
   def ensure_authentication_token
     self.authentication_token || generate_authentication_token
   end
