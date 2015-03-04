@@ -5,7 +5,7 @@ Rails.application.routes.draw do
   get 'home/index'
   resources :notes
 
-  devise_for :users
+  devise_for :users, controllers: { sessions: "sessions" }
   resources :users
 
   resource :authentication_token, only: [:update, :destroy]
