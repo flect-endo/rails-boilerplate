@@ -49,7 +49,7 @@
         <div class="navbar-collapse collapse navbar-responsive-collapse">
           <% if user_signed_in? %>
           <ul class="nav navbar-nav">
-            <li><%= link_to "Note", "/notes"  %></li>
+            <li><%= link_to "Note", "/notes", class: 'glyphicon glyphicon-home' %></li>
             <li><%= link_to "User", "/users"  %></li>
           </ul>
           <% end %>
