@@ -24,5 +24,9 @@ module RailsBoilerplate
     config.active_record.raise_in_transactional_callbacks = true
 
     config.assets.precompile = config.assets.precompile + %w(*.png *.jpg *.jpeg *.gif *.woff *.ttf *.svg *.eot)
+
+    config.to_prepare
+      DeviseController.respond_to :html, :json
+    end
   end
 end
