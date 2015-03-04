@@ -20,21 +20,18 @@
     <div class="controls">
       <%= f.select :user_id, options_from_collection_for_select(@users, :id, :email), {}, :class => 'form-control' %>
     </div>
-    <%= error_span(@note[:user_id]) %>
   </div>
   <div class="control-group">
     <%= f.label :title, :class => 'control-label' %>
     <div class="controls">
       <%= f.text_field :title, :class => 'form-control' %>
     </div>
-    <%= error_span(@note[:title]) %>
   </div>
   <div class="control-group">
     <%= f.label :body, :class => 'control-label' %>
     <div class="controls">
       <%= f.text_field :body, :class => 'form-control' %>
     </div>
-    <%= error_span(@note[:body]) %>
   </div>
 
 
