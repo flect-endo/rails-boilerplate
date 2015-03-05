@@ -28,5 +28,13 @@ module RailsBoilerplate
     config.to_prepare do
       DeviseController.respond_to :html, :json
     end
+
+    # Cross Domain 対応
+    config.action_dispatch.default_headers = {
+      'Access-Control-Allow-Credentials' => 'true',
+      # FIXME: ローカルの Ionic からしか受け付けていないので修正
+      'Access-Control-Allow-Origin' => 'http://localhost:8100',
+      'Access-Control-Request-Method' => '*'
+    }
   end
 end
