@@ -49,5 +49,6 @@ ja:
       user:
         id: *id
         email: "メールアドレス"
+        authentication_token: "認証トークン"
         created_at: *created_at
         updated_at: *updated_at

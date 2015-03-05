@@ -1,14 +1,10 @@
-<h3>Authentication Token</h3>
-
 <div class="panel panel-default">
   <div class="panel-heading">
-    <h4><%= t('.title', :resource => resource_class.model_name.human , :default => 'Edit #{resource_name.to_s.humanize}') %></h4>
+    <h4><%= resource_class.human_attribute_name(:authentication_token) %></h4>
   </div>
   <div class="panel-body">
-    <%= form_for(resource, :as => resource_name, :url => registration_path(resource_name), :html => { :method => :put }) do |f| %>
     <div class="form-group">
-      <%= f.label :authentication_token %>
-      <%= f.text_field :authentication_token, readonly: true, autofocus: true, class: "form-control" %>
+      <%= text_field resource_class.model_name.singular, :authentication_token, readonly: true, class: "form-control" %>
     </div>
 
     <%= link_to t("helpers.links.create"),
@@ -17,6 +13,5 @@
     <%= link_to t("helpers.links.destroy"),
                 authentication_token_path,
                 method: :delete, remote: true, id: 'delete_auth_token', class: 'btn btn-danger' %>
-    <% end %>
   </div>
 </div>
