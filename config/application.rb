@@ -30,11 +30,16 @@ module RailsBoilerplate
     end
 
     # Cross Domain 対応
-    config.action_dispatch.default_headers = {
-      'Access-Control-Allow-Credentials' => 'true',
-      # FIXME: ローカルの Ionic からしか受け付けていないので修正
-      'Access-Control-Allow-Origin' => 'http://localhost:8100',
-      'Access-Control-Request-Method' => '*'
-    }
+    # FIXME: ローカルの Ionic からしか受け付けていないので要検討
+    config.middleware.insert_before Warden::Manager, Rack::Cors do
+      allow do
+        origins 'localhost:8100'
+        resource '*',
+          headers: :any,
+          methods: [:get, :post, :delete, :put, :options],
+          credentials: true,
+          max_age: 86400
+      end
+    end
   end
 end
