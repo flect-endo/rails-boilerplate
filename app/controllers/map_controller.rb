@@ -5,7 +5,6 @@ class MapController < ApplicationController
 
   def index
     @map = Map.new
-    @notes = Note.all
   end
 
   def upload_list
@@ -23,9 +22,6 @@ class MapController < ApplicationController
   end
 
   def places
-    @places = []
-    params[:places].each do |place_attrs|
-      @places.push(Place.new(place_attrs[1].permit(:address, :latitude, :longitude)))
-    end
+    @places = params[:places].map {|place_params| Place.new(place_params[1].permit(:address, :latitude, :longitude)) }
   end
 end
