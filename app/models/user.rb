@@ -1,15 +1,23 @@
 class User < ActiveRecord::Base
   # Include default devise modules. Others available are:
   # :confirmable, :lockable, :timeoutable and :omniauthable
-  devise :database_authenticatable, :registerable,
-         :recoverable, :rememberable, :trackable, :validatable,
-         :confirmable
+  devise :database_authenticatable, :registerable, :confirmable,
+         :recoverable, :rememberable, :trackable, :validatable
 
   validates :authentication_token, uniqueness: true, allow_nil: true
   has_many :notes
 
-  # ユーザ登録時に認証トークンを自動生成
-  after_create :ensure_authentication_token
+  def active_for_authentication?
+    # FIXME: メールアドレスを確認していなくてもログインできてしまうので、回避
+    # Devise の confirmable.rb を見ると、メール送信日時しか評価しておらず、実際に確認が取れてなくても
+    # この値が true を返してしまうことで、メール確認済みと評価されてしまうので、判定を除外する
+    super && (!confirmation_required? || confirmed?) #  || confirmation_period_valid?)
+  end
+
+  def after_confirmation
+    super
+    ensure_authentication_token
+  end
 
   def ensure_authentication_token
     self.authentication_token || generate_authentication_token
