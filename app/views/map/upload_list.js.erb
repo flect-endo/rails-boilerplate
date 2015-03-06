@@ -1,0 +1,6 @@
+var results = [];
+<% @data.each_with_index do |row, index| %>
+  addMarker("<%= j row[0] %>", <%= index %>, <%= @data.length %>);
+<% end %>
+
+$("#new_map").hide();

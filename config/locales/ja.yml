@@ -36,6 +36,10 @@ ja:
   users:
     index:
       title: "ユーザ一覧"
+  activemodel:
+    attributes:
+      map:
+        file: "CSVファイル"
   activerecord:
     models:
       note: "メモ"
@@ -54,3 +58,7 @@ ja:
         authentication_token: "認証トークン"
         created_at: *created_at
         updated_at: *updated_at
+      place:
+        address: "住所"
+        latitude: "緯度"
+        longitude: "経度"

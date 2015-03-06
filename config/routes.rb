@@ -11,6 +11,8 @@ Rails.application.routes.draw do
   resource :authentication_token, only: [:update, :destroy]
 
   get 'map' => 'map#index'
+  post 'map/upload_list'=> 'map#upload_list'
+  post 'map/places' => 'map#places'
 
   # The priority is based upon order of creation: first created -> highest priority.
   # See how all your routes lay out with "rake routes".
