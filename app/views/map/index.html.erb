@@ -6,6 +6,11 @@
       var map = null;
       var places = [];
       var numOfPlace = 0;
+      var points = [];
+      var directionsDisplay = new google.maps.DirectionsRenderer({
+        draggable: true,
+        preserveViewpoint: false
+      });
 
       function initialize() {
         var latlng = new google.maps.LatLng(35.686773, 139.68815);
@@ -15,6 +20,7 @@
           mapTypeId: google.maps.MapTypeId.ROADMAP
         };
         map = new google.maps.Map($("#map")[0], mapOptions);
+        directionsDisplay.setMap(map);
       }
 
       var addMarker = function(key, index, total) {
@@ -30,14 +36,16 @@
 
             var location = results[0].geometry.location;
 
-            // マーカーを表示
-            var marker = new google.maps.Marker({
-              position: location,
-              title: request.address,
-              map: map,
-              icon: new google.maps.MarkerImage("http://chart.apis.google.com/chart?chst=d_map_pin_letter&chld="+ (index+1) + "|ff7e73|000000"),
-              shadow: new google.maps.MarkerImage("http://chart.apis.google.com/chart?chst=d_map_pin_shadow",null,null, new google.maps.Point(12, 35) )
-            });
+            // マーカーを表示 -> ルート計算で表示されるためコメントアウト
+            // var marker = new google.maps.Marker({
+            //   position: location,
+            //   title: request.address,
+            //   map: map,
+            //   icon: new google.maps.MarkerImage("http://chart.apis.google.com/chart?chst=d_map_pin_letter&chld="+ (index+1) + "|ff7e73|000000"),
+            //   shadow: new google.maps.MarkerImage("http://chart.apis.google.com/chart?chst=d_map_pin_shadow",null,null, new google.maps.Point(12, 35) )
+            // });
+
+            points.push(location);
 
             places.push({
               address: results[0].formatted_address,
@@ -46,8 +54,26 @@
             });
 
             if (numOfPlace === total) {
+              var routeRequest = {
+                origin: points[0],
+                destination: points[points.length - 1],
+                travelMode: google.maps.DirectionsTravelMode.DRIVING
+              };
+              if (points.length > 1) {
+                var waypoints = [];
+                for (var i=1; i<points.length-1; i++) {
+                  waypoints.push({location: points[i], stopover: true});
+                }
+                routeRequest.waypoints = waypoints;
+              }
+              var directionsService = new google.maps.DirectionsService();
+              directionsService.route(routeRequest, function(response, status) {
+                if (status == google.maps.DirectionsStatus.OK) {
+                  directionsDisplay.setDirections(response);
+                }
+              });
+
               // JS側で取得した位置情報を登録するため、再度POST
-              console.log("post places...");
               $.ajax({
                 url: "/map/places",
                 type: 'post',
