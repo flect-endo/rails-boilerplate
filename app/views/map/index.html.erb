@@ -1,0 +1,29 @@
+<%= content_for :header do %>
+    <%= javascript_include_tag "https://maps.googleapis.com/maps/api/js?libraries=geometry&libraries=places&sensor=false" %>
+    <script>
+      google.maps.event.addDomListener(window, 'load', initialize);
+
+      function initialize() {
+        var latlng = new google.maps.LatLng(35.686773, 139.68815);
+        var mapOptions = {
+          center: latlng,
+          zoom: 16,
+          mapTypeId: google.maps.MapTypeId.ROADMAP
+        };
+        var map = new google.maps.Map($("#map")[0], mapOptions);
+      }
+    </script>
+<% end %>
+
+<div class="page-header">
+  <h1><%= t("common.models.map") %></h1>
+
+  <div class="row">
+    <div class="col-md-8">
+      <div id="map" data-tap-disabled="true" style="width: 500px; height: 500px;"></div>
+    </div>
+    <div class="col-md-4">
+      hogehoge
+    </div>
+  </div>
+</div>

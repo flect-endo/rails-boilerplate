@@ -22,6 +22,8 @@ ja:
       edit: "編集"
       destroy: "削除"
   common:
+    models:
+      map: "マップ"
     attributes:
       id: &id "ID"
       created_at: &created_at "作成日時"

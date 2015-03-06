@@ -35,6 +35,7 @@
     <%= favicon_link_tag 'favicon.ico', :rel => 'shortcut icon' %>
 
     <%= javascript_include_tag "application" %>
+    <%= yield :header %>
   </head>
   <body>
 
@@ -50,6 +51,7 @@
           <% if user_signed_in? %>
           <ul class="nav navbar-nav">
             <li><%= link_to_glyph "book", t("activerecord.models.note"), "/notes" %></li>
+            <li><%= link_to_glyph "globe", t("common.models.map"), "/map"  %></li>
             <li><%= link_to_glyph "user", t("activerecord.models.user"), "/users"  %></li>
           </ul>
           <% end %>
