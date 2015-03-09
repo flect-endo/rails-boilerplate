@@ -1,7 +1,7 @@
 class HomeController < ApplicationController
   # before_action :authenticate_user!
 
-  protect_from_forgery except: :index
+  protect_from_forgery except: :index_auth
 
   def index
     logger.info "request headers -------------------------------------------------"
