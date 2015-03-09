@@ -64,6 +64,11 @@
             <li><%= link_to_glyph "log-in", t("devise.shared.links.sign_in"), new_user_session_path %></li>
             <% end %>
           </ul>
+          <% if user_signed_in? %>
+          <p class="navbar-text navbar-right">
+            <%= current_user.email %>
+          </p>
+          <% end %>
         </div>
       </div>
     </div>
