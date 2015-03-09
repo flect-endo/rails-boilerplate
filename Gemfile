@@ -48,6 +48,9 @@ end
 
 gem 'rack-cors', require: 'rack/cors'
 
+gem 'omniauth'
+gem 'omniauth-salesforce'
+
 gem 'activerecord-session_store'
 
 # for Ajax file upload

@@ -15,6 +15,7 @@ ja:
       update: "%{model} 更新"
     links:
       edit_account: "アカウント編集"
+      sign_in_salesforce: "Salesforce 経由でログイン"
       sign_out: "ログアウト"
       new: "新規"
       create: "作成"

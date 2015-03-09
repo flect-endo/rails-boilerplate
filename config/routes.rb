@@ -6,6 +6,12 @@ Rails.application.routes.draw do
   resources :notes
 
   devise_for :users, controllers: { sessions: "users/sessions" }
+  devise_scope :user do
+    get '/auth/:provider/callback' => 'users/sessions#callback'
+    post '/auth/:provider/callback' => 'users/sessions#callback'
+  end
+  get '/signout' => 'users/sessions#destroy', as: :signout
+
   resources :users
 
   resource :authentication_token, only: [:update, :destroy]

@@ -7,6 +7,19 @@ class User < ActiveRecord::Base
   validates :authentication_token, uniqueness: true, allow_nil: true
   has_many :notes
 
+  def self.create_with_omniauth(auth)
+    create! do |user|
+      user.email = auth["info"]["email"]
+      # FIXME: Devise デフォルトの encrypted_password を回避するための応急処置
+      user.password = user.password_confirmation = "password"
+
+      user.provider = auth["provider"]
+      user.uid = auth["uid"]
+      user.name = auth["info"]["name"]
+      user.nickname = auth["info"]["nickname"]
+    end
+  end
+
   def active_for_authentication?
     # FIXME: メールアドレスを確認していなくてもログインできてしまうので、回避
     # Devise の confirmable.rb を見ると、メール送信日時しか評価しておらず、実際に確認が取れてなくても

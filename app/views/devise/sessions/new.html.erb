@@ -20,6 +20,9 @@
         </div>
         <% end %>
       <%= f.submit  t('.sign_in', :default => "Sign in"), class: "btn btn-primary" %>
+
+      <%= link_to t("helpers.links.sign_in_salesforce"), '/auth/salesforce' %>
+
     <% end %>
   </div>
 </div>
