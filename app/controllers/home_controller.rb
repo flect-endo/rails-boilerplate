@@ -19,6 +19,6 @@ class HomeController < ApplicationController
 
     secret = Rails.application.secrets.client_secret
     session[:signed_request] = Restforce.decode_signed_request(params[:signed_request], secret)
-    redirect '/home/index'
+    redirect_to home_index_url
   end
 end
