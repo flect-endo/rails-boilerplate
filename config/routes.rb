@@ -2,6 +2,7 @@ Rails.application.routes.draw do
   root 'home#index'
 
   get 'home/index'
+  post 'home/index' => 'home#index_auth', as: 'auth'
   resources :notes
 
   devise_for :users, controllers: { sessions: "users/sessions" }
