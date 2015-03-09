@@ -24,6 +24,7 @@ class HomeController < ApplicationController
     logger.info decoded
     logger.info "*********************************2"
     logger.info decoded.length
+    session[:signed_request] = decoded
     redirect_to home_index_url
   end
 end
