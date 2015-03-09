@@ -48,6 +48,8 @@ end
 
 gem 'rack-cors', require: 'rack/cors'
 
+gem 'activerecord-session_store'
+
 # for Ajax file upload
 gem 'remotipart'
 
