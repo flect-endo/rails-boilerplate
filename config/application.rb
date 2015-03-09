@@ -40,5 +40,9 @@ module RailsBoilerplate
     #       max_age: 86400
     #   end
     # end
+
+    # "X-Frame-Options: SAMEORIGIN" レスポンスヘッダによって iframe で view が表示できない対応
+    # config.action_dispatch.default_headers['X-Frame-Options'] = "Allow-From https://hoge.com"
+    config.action_dispatch.default_headers.delete 'X-Frame-Options'
   end
 end
