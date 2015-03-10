@@ -27,14 +27,15 @@ class User < ActiveRecord::Base
 
     user = where(provider: provider, uid: uid).first
     if user.nil?
-      user = create! do |u|
-        u.email = context['user']['userName']
+      user = User.new(
+        email: context['user']['userName'],
         # FIXME: Devise デフォルトの encrypted_password を回避するための応急処置
-        u.password = u.password_confirmation = "password"
-
-        u.provider = "salesforce"
-        u.name = context['user']['userName']
-      end
+        password: "password",
+        password_confirmation: "password",
+        provider: "salesforce",
+        uid: uid,
+        name: context['user']['userName']
+      )
       # メールアドレスの確認はスキップ(Force.com ログイン可能な時点で住んでいるものとみなす)
       user.skip_confirmation!
       user.save!
