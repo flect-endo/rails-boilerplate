@@ -5,7 +5,7 @@ class User < ActiveRecord::Base
          :recoverable, :rememberable, :trackable, :validatable
 
   validates :authentication_token, uniqueness: true, allow_nil: true
-  has_many :notes
+  has_many :notes, dependent: :delete_all
 
   # OAuth 経由で Salesforce ログインしてきた場合のユーザ情報を取得する
   def self.find_or_create_with_omniauth(auth)
