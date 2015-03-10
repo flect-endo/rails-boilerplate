@@ -1,0 +1,31 @@
+<%= content_for :header do %>
+<script>
+  $.get("/salesforce/credentials", function(data, status) {
+    var instanceUrl = data.instance_url;
+    var oauthToken = data.oauth_token;
+    $.ajax({
+      url: instanceUrl + '/services/data/v20.0/sobjects/Account/',
+      type: 'GET',
+      headers: {
+        'Authorization': 'OAuth ' + oauthToken
+      },
+      dataType: 'json',
+      success: function(data) {
+        console.log("success!");
+        console.log(data);
+      },
+      error: function(xhr, textStatus, errorThrown) {
+        console.log("error");
+        console.log(textStatus);
+        console.log(errorThrown);
+      },
+      complete: function(xhr, textStatus) {
+        console.log("complete!");
+      }
+    });
+
+  });
+</script>
+<% end %>
+
+aaaaa

@@ -5,6 +5,11 @@ class Users::SessionsController < Devise::SessionsController
     auth = request.env["omniauth.auth"]
     user = User.find_or_create_with_omniauth(auth)
 
+    session[:credentials] = {
+      oauth_token: auth["credentials"]["token"],
+      refresh_token: auth["credentials"]["refresh_token"],
+      instance_url: auth["credentials"]["instance_url"]
+    }
     session[:restforce] = Restforce.new(
       oauth_token: auth["credentials"]["token"],
       refresh_token: auth["credentials"]["refresh_token"],

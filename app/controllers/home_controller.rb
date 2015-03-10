@@ -13,6 +13,11 @@ class HomeController < ApplicationController
     signed_request = Restforce.decode_signed_request(params[:signed_request], secret)
 
     # session[:signed_request] = signed_request
+    session[:credentials] = {
+      oauth_token: signed_request['client']['oauthToken'],
+      refresh_token: signed_request['client']['refreshToken'],
+      instance_url: signed_request['client']['instanceUrl']
+    }
     session[:restforce] = Restforce.new(
       oauth_token: signed_request['client']['oauthToken'],
       refresh_token: signed_request['client']['refreshToken'],

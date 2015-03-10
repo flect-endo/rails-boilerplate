@@ -4,6 +4,8 @@ Rails.application.routes.draw do
   get 'home/index'
   post 'home/index' => 'home#index_auth', as: 'auth'
   resources :notes
+  get 'salesforce/index'
+  get 'salesforce/credentials'
 
   devise_for :users, controllers: { sessions: "users/sessions" }
   devise_scope :user do
