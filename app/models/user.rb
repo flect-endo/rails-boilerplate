@@ -35,6 +35,9 @@ class User < ActiveRecord::Base
         user.provider = "salesforce"
         user.name = context['user']['userName']
       end
+      # メールアドレスの確認はスキップ(Force.com ログイン可能な時点で住んでいるものとみなす)
+      user.skip_confirmation!
+      user.save!
     end
     user
   end
