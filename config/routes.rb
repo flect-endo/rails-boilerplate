@@ -3,6 +3,7 @@ Rails.application.routes.draw do
 
   get 'home/index'
   resources :notes
+  resources :checklists
   get 'salesforce/index'
   get 'salesforce/credentials'
 

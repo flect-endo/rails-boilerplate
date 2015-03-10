@@ -52,6 +52,7 @@
           <ul class="nav navbar-nav">
             <li><%= link_to_glyph "book", t("activerecord.models.note"), "/notes" %></li>
             <li><%= link_to_glyph "globe", t("common.models.map"), "/map", { "data-no-turbolink" => "1" } %></li>
+            <li><%= link_to_glyph "check", t("activerecord.models.checklist"), "/checklists" %></li>
             <li><%= link_to_glyph "user", t("activerecord.models.user"), "/users"  %></li>
             <% if current_user.logged_in_from_salesforce? %>
               <li>
