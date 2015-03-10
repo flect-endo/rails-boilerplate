@@ -53,6 +53,15 @@ class User < ActiveRecord::Base
     user
   end
 
+  def logged_in_from_salesforce?
+    # モデルから session にアクセスできないため
+    salesforce_provider? # && session[:restforce].present?
+  end
+
+  def salesforce_provider?
+    provider === "salesforce"
+  end
+
   def active_for_authentication?
     # FIXME: メールアドレスを確認していなくてもログインできてしまうので、回避
     # Devise の confirmable.rb を見ると、メール送信日時しか評価しておらず、実際に確認が取れてなくても

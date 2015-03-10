@@ -37,6 +37,9 @@ ja:
   users:
     index:
       title: "ユーザ一覧"
+  salesforce:
+    index:
+      title: "Salesforce連携"
   activemodel:
     attributes:
       map:

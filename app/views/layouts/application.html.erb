@@ -53,7 +53,12 @@
             <li><%= link_to_glyph "book", t("activerecord.models.note"), "/notes" %></li>
             <li><%= link_to_glyph "globe", t("common.models.map"), "/map", { "data-no-turbolink" => "1" } %></li>
             <li><%= link_to_glyph "user", t("activerecord.models.user"), "/users"  %></li>
-            <li><%= link_to "Salesforce", salesforce_index_url %></li>
+            <% if current_user.logged_in_from_salesforce? %>
+              <li>
+                <%= link_to_glyph "grain", t("salesforce.index.title"), salesforce_index_url,
+                                  { "data-no-turbolink" => "1" } %>
+              </li>
+            <% end %>
           </ul>
           <% end %>
           <ul class="nav navbar-nav navbar-right">
