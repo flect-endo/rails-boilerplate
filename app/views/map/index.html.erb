@@ -13,14 +13,28 @@
       });
 
       function initialize() {
-        var latlng = new google.maps.LatLng(35.686773, 139.68815);
-        var mapOptions = {
-          center: latlng,
-          zoom: 16,
-          mapTypeId: google.maps.MapTypeId.ROADMAP
+        // 指定座標（緯度、経度）で地図を初期化
+        var initMap = function(latitude, longitude) {
+          var latlng = new google.maps.LatLng(latitude, longitude);
+          var mapOptions = {
+            center: latlng,
+            zoom: 16,
+            mapTypeId: google.maps.MapTypeId.ROADMAP
+          };
+          map = new google.maps.Map($("#map")[0], mapOptions);
+          directionsDisplay.setMap(map);
         };
-        map = new google.maps.Map($("#map")[0], mapOptions);
-        directionsDisplay.setMap(map);
+
+        if (navigator.geolocation) {
+          navigator.geolocation.getCurrentPosition(function(pos) {
+            initMap(pos.coords.latitude, pos.coords.longitude);
+          }, function(err) {
+            initMap(35.686773, 139.68815); // 新宿のあたり
+          });
+        } else {
+          console.log("navigator.geolocation is no supported.");
+          initMap(35.686773, 139.68815); // 新宿のあたり
+        }
       }
 
       var addMarker = function(key, index, total) {
