@@ -5,6 +5,7 @@ class ChecklistsController < ApplicationController
   # GET /checklists.json
   def index
     @checklists = Checklist.all
+    @csv_form = CsvForm.new
   end
 
   # GET /checklists/1
@@ -58,6 +59,18 @@ class ChecklistsController < ApplicationController
     respond_to do |format|
       format.html { redirect_to checklists_url, notice: 'Checklist was successfully destroyed.' }
       format.json { head :no_content }
+    end
+  end
+
+  def upload
+    csv_form = CsvForm.new(params[:csv_form])
+    @checklists = []
+
+    Checklist.transaction do
+      Checklist.delete_all
+      csv_form.read do |row|
+        @checklists << Checklist.create!(title: row[0])
+      end
     end
   end
 

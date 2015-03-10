@@ -3,7 +3,11 @@ Rails.application.routes.draw do
 
   get 'home/index'
   resources :notes
-  resources :checklists
+  resources :checklists do
+    collection do
+      post 'upload'
+    end
+  end
   get 'salesforce/index'
   get 'salesforce/credentials'
 
