@@ -2,7 +2,6 @@ Rails.application.routes.draw do
   root 'home#index'
 
   get 'home/index'
-  post 'canvasui' => 'users/sessions#auth_signed_request'
   resources :notes
   get 'salesforce/index'
   get 'salesforce/credentials'
@@ -11,6 +10,7 @@ Rails.application.routes.draw do
   devise_scope :user do
     get '/auth/:provider/callback' => 'users/sessions#callback'
     post '/auth/:provider/callback' => 'users/sessions#callback'
+    post '/canvasui' => 'users/sessions#auth_signed_request'
   end
   get '/signout' => 'users/sessions#destroy', as: :signout
 
