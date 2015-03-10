@@ -30,7 +30,7 @@ class User < ActiveRecord::Base
       user = create! do |u|
         u.email = context['user']['userName']
         # FIXME: Devise デフォルトの encrypted_password を回避するための応急処置
-        u.password = user.password_confirmation = "password"
+        u.password = u.password_confirmation = "password"
 
         u.provider = "salesforce"
         u.name = context['user']['userName']
