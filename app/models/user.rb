@@ -14,8 +14,8 @@ class User < ActiveRecord::Base
       user = User.new(
         email: auth["info"]["email"],
         # FIXME: Devise デフォルトの encrypted_password を回避するための応急処置
-        password: "password"
-        password_confirmation: "password"
+        password: "password",
+        password_confirmation: "password",
 
         provider: auth["provider"],
         uid: auth["uid"],
