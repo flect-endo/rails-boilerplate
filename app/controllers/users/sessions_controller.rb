@@ -48,12 +48,15 @@ class Users::SessionsController < Devise::SessionsController
       refresh_token: refresh_token,
       instance_url: instance_url
     }
-    session[:restforce] = Restforce.new(
-      oauth_token: oauth_token,
-      refresh_token: refresh_token,
-      instance_url: instance_url,
-      client_id: Rails.application.secrets.client_key,
-      client_secret: Rails.application.secrets.client_secret
-    )
+    # セッションに Restforce インスタンスを持つと、
+    # require 'restforce" していないコントローラを読み込んだ時に
+    # undefiend エラーになることがあるので、とりあえずコメントアウト
+    # session[:restforce] = Restforce.new(
+    #   oauth_token: oauth_token,
+    #   refresh_token: refresh_token,
+    #   instance_url: instance_url,
+    #   client_id: Rails.application.secrets.client_key,
+    #   client_secret: Rails.application.secrets.client_secret
+    # )
   end
 end
