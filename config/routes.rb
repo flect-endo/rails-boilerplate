@@ -2,7 +2,7 @@ Rails.application.routes.draw do
   root 'home#index'
 
   get 'home/index'
-  post 'home/index' => 'home#index_auth', as: 'auth'
+  post 'canvasui' => 'users/sessions#auth_signed_request'
   resources :notes
   get 'salesforce/index'
   get 'salesforce/credentials'
