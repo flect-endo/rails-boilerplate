@@ -1,7 +1,12 @@
 class CsvForm
   include ActiveModel::Model
 
-  attr_accessor :file
+  attr_accessor :file, :filename
+
+  def initialize(attributes={})
+    super
+    @filename ||= file.try(:original_filename)
+  end
 
   def read
     data = file.read

@@ -4,20 +4,16 @@ require 'kconv'
 class MapController < ApplicationController
 
   def index
-    @map = Map.new
+    @csv_form = CsvForm.new
   end
 
   def upload_list
-    @name = ""
-    @data = []
+    csv_form = CsvForm.new(params[:csv_form])
 
-    if (params[:map][:file])
-      @name = params[:map][:file].original_filename
-      filedata = params[:map][:file].read
-      filedata.force_encoding("utf-8")
-      CSV.parse(filedata) do |row|
-        @data << row
-      end
+    @name = csv_form.filename
+    @data = []
+    csv_form.read do |row|
+      @data << row
     end
   end
 

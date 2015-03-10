@@ -13,7 +13,7 @@
       });
 
       function initialize() {
-        // 指定座標（緯度、経度）で地図を初期化
+        // コールバック: 指定座標（緯度、経度）で地図を初期化
         var initMap = function(latitude, longitude) {
           var latlng = new google.maps.LatLng(latitude, longitude);
           var mapOptions = {
@@ -37,6 +37,7 @@
         }
       }
 
+      // 地図上にルート拠点を追加
       var addMarker = function(key, index, total) {
         var request = {
           address: key
@@ -67,6 +68,8 @@
               longitude: location.lng()
             });
 
+            // アップロードされた拠点が全て処理された時の処理
+            // 有効なルートを検索する
             if (numOfPlace === total) {
               var routeRequest = {
                 origin: points[0],
@@ -110,7 +113,7 @@
       <div id="map" data-tap-disabled="true" style="width: 500px; height: 500px;"></div>
     </div>
     <div class="col-md-6">
-      <%= form_for @map, url: { action: 'upload_list' }, html: { multipart: true, remote: true, authenticity_token: true } do |f| %>
+      <%= form_for @csv_form, url: { action: 'upload_list' }, html: { multipart: true, remote: true, authenticity_token: true } do |f| %>
         <div class="control-group">
           <%= f.label :file, :class => 'control-label' %>
           <div class="controls">
