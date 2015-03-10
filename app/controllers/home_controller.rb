@@ -12,8 +12,6 @@ class HomeController < ApplicationController
 
     session[:signed_request] = signed_request
     user = User.find_or_create_with_signed_request(signed_request)
-    logger.info "logged in from Force.com Canvas"
-    logger.info user
     sign_in_and_redirect user
 
     # redirect_to home_index_url

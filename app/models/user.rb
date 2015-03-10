@@ -7,19 +7,29 @@ class User < ActiveRecord::Base
   validates :authentication_token, uniqueness: true, allow_nil: true
   has_many :notes
 
-  def self.create_with_omniauth(auth)
-    create! do |user|
-      user.email = auth["info"]["email"]
-      # FIXME: Devise デフォルトの encrypted_password を回避するための応急処置
-      user.password = user.password_confirmation = "password"
+  # OAuth 経由で Salesforce ログインしてきた場合のユーザ情報を取得する
+  def self.find_or_create_with_omniauth(auth)
+    user = where(provider: auth["provider"], uid: auth["uid"]).first
+    if user.nil?
+      user = User.new(
+        email: auth["info"]["email"],
+        # FIXME: Devise デフォルトの encrypted_password を回避するための応急処置
+        password: "password"
+        password_confirmation: "password"
 
-      user.provider = auth["provider"]
-      user.uid = auth["uid"]
-      user.name = auth["info"]["name"]
-      user.nickname = auth["info"]["nickname"]
+        provider: auth["provider"],
+        uid: auth["uid"],
+        name: auth["info"]["name"],
+        nickname: auth["info"]["nickname"]
+      )
+      # メールアドレスの確認はスキップ(Force.com ログイン可能な時点で住んでいるものとみなす)
+      user.skip_confirmation!
+      user.save!
     end
+    user
   end
 
+  # Force.com Canvasからの署名付き要求でログインするためのユーザ情報を取得する
   def self.find_or_create_with_signed_request(signed_request)
     context = signed_request['context']
     provider = "salesforce"

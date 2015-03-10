@@ -1,7 +1,12 @@
 class Users::SessionsController < Devise::SessionsController
   def callback
     auth = request.env["omniauth.auth"]
-    user = User.where(provider: auth["provider"], uid: auth["uid"]).first || User.create_with_omniauth(auth)
+    user = User.find_or_create_with_omniauth(auth)
+
+    # アクセストークンを取得する
+    # auth["credentials"]["token"]
+    # auth["credentials"]["instance_url"]
+
     sign_in_and_redirect user
   end
 

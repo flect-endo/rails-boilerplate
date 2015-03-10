@@ -55,8 +55,12 @@ ja:
         updated_at: *updated_at
       user:
         id: *id
+        name: "ユーザ名"
         email: "メールアドレス"
+        provider: "認証プロバイダ"
         authentication_token: "認証トークン"
+        current_sign_in_at: "現在のログイン時刻"
+        last_sign_in_at: "最終ログイン時刻"
         created_at: *created_at
         updated_at: *updated_at
       place:
