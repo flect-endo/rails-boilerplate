@@ -20,6 +20,25 @@ class User < ActiveRecord::Base
     end
   end
 
+  def self.find_or_create_with_signed_request(signed_request)
+    context = signed_request['context']
+    provider = "salesforce"
+    uid = "#{context['links']['loginUrl']}id/#{context['organization']['organizationId']}/#{context['user']['userId']}"
+
+    user = where(provider: provider, uid: uid).first
+    if user.nil?
+      create! do |user|
+        user.email = context['user']['userName']
+        # FIXME: Devise デフォルトの encrypted_password を回避するための応急処置
+        user.password = user.password_confirmation = "password"
+
+        user.provider = "salesforce"
+        user.name = context['user']['userName']
+      end
+    end
+    user
+  end
+
   def active_for_authentication?
     # FIXME: メールアドレスを確認していなくてもログインできてしまうので、回避
     # Devise の confirmable.rb を見ると、メール送信日時しか評価しておらず、実際に確認が取れてなくても
