@@ -51,7 +51,7 @@ ja:
     index_checklists:
       title: "チェック項目レポート"
     new_checklists:
-      title: "新規チェック項目レポート"
+      title: "新規チェックリスト作成"
   checklists:
     index:
       title: "チェック項目一覧"

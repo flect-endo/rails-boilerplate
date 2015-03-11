@@ -8,7 +8,8 @@ module ApplicationHelper
   end
 
   def boolean_glyph(boolean_value)
-    boolean_value ? (content_tag :i, "", class: ["glyphicon", "glyphicon-ok", "text-success"]) : " "
+    boolean_value ? (content_tag :i, "", class: ["glyphicon", "glyphicon-ok", "text-success"])
+                  : (content_tag :i, "", class: ["glyphicon", "glyphicon-remove", "text-danger"])
   end
 
   def bootstrap_flash(options = {})

@@ -25,6 +25,7 @@ class UsersController < ApplicationController
   end
 
   def index_checklists
+    @checklist_report = @user.user_checklists.group_by {|item| item.date}
   end
 
   def new_checklists
