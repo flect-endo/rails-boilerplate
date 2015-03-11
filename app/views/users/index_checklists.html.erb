@@ -2,14 +2,14 @@
   <h1><%= t("users.index_checklists.title") %></h1>
 </div>
 
-<% @checklist_report.each do |date, checklists| %>
-  <% date_key = date.strftime("%Y-%m-%d") %>
+<% @checklist_report.each do |datetime, checklists| %>
+  <% date_key = datetime.nil? ? "Nil" : datetime.strftime("%Y-%m-%d-%H-%M-%S") %>
   <div class="panel-group" id="accordion" role="tablist" aria-multiselectable="true">
     <div class="panel panel-default">
       <div class="panel-heading" role="tab" id="heading<%= date_key %>">
         <h4 class="panel-title">
           <a class="collapsed" data-toggle="collapse" data-parent="#accordion" href="#collapse<%= date_key %>" aria-expanded="false" aria-controls="collapse<%= date_key %>">
-            <%=l date %>
+            <%= datetime.nil? ? "undefined" : l(datetime) %>
           </a>
         </h4>
       </div>

@@ -25,7 +25,7 @@ class UsersController < ApplicationController
   end
 
   def index_checklists
-    @checklist_report = @user.user_checklists.group_by {|item| item.date}
+    @checklist_report = @user.user_checklists.group_by { |item| item.datetime }
   end
 
   def new_checklists
@@ -38,13 +38,12 @@ class UsersController < ApplicationController
     checked_ids = params[:user][:user_checklists]
     checked_items, unchecked_items = checklists.partition {|item| checked_ids.include? item.id.to_s }
 
-    now = Time.now
-    @user.user_checklists.clear
-    @user.user_checklists << checked_items.map {|item| UserChecklist.new(user: @user, checklist: item, date: now, checked: true) }
-    @user.user_checklists << unchecked_items.map {|item| UserChecklist.new(user: @user, checklist: item, date: now, checked: false) }
+    now = Time.current
+    @user.user_checklists << checked_items.map {|item| UserChecklist.new(user: @user, checklist: item, datetime: now, checked: true) }
+    @user.user_checklists << unchecked_items.map {|item| UserChecklist.new(user: @user, checklist: item, datetime: now, checked: false) }
 
     respond_to do |format|
-      format.html { redirect_to users_url, notice: 'User checlists were successfully updated.' }
+      format.html { redirect_to checklists_user_url, notice: 'User checlists were successfully updated.' }
       format.json { head :no_content }
     end
   end
