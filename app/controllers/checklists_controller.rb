@@ -63,6 +63,16 @@ class ChecklistsController < ApplicationController
     end
   end
 
+  # DELETE /checklists
+  # DELETE /checklists.json
+  def destroy_all
+    Checklist.delete_all
+    respond_to do |format|
+      format.html { redirect_to checklists_url, notice: 'All checklists were successfully destroyed.' }
+      format.json { head :no_content }
+    end
+  end
+
   def upload
     csv_form = CsvForm.new(params[:csv_form])
     @checklists = []

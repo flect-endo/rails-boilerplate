@@ -15,6 +15,7 @@ ja:
       create: "%{model} 新規作成"
       update: "%{model} 更新"
     links:
+      confirm: "元に戻すことはできません。本当に削除しますか？"
       edit_account: "アカウント編集"
       sign_in_salesforce: "Salesforce 経由でログイン"
       sign_out: "ログアウト"
@@ -24,6 +25,7 @@ ja:
       show: "詳細"
       edit: "編集"
       destroy: "削除"
+      destroy_all: "全件削除"
   common:
     models:
       map: "マップ"

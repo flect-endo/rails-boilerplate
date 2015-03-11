@@ -139,4 +139,23 @@ RSpec.describe ChecklistsController, type: :controller do
     end
   end
 
+  describe "DELETE #destroy_all" do
+    before {
+      create_list(:checklist, 5)
+    }
+
+    it "destroys all checklists" do
+      expect {
+        delete :destroy_all, valid_session
+      }.to change(Checklist, :count).by(-5)
+      expect(Checklist.count).to eq(0)
+    end
+
+    it "redirects to the checklists list" do
+      delete :destroy_all, valid_session
+      expect(response).to redirect_to(checklists_url)
+    end
+  end
+
+
 end

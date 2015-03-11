@@ -6,6 +6,7 @@ Rails.application.routes.draw do
   resources :checklists do
     collection do
       post 'upload'
+      delete 'destroy_all'
     end
   end
   get 'salesforce/index'
