@@ -18,6 +18,7 @@
 # See http://rubydoc.info/gems/rspec-core/RSpec/Core/Configuration
 require 'devise'
 require 'support/controller_macros'
+require 'support/request_macros'
 require 'factory_girl'
 
 RSpec.configure do |config|
@@ -48,6 +49,7 @@ RSpec.configure do |config|
 
   config.include Devise::TestHelpers, type: :controller
   config.extend ControllerMacros, type: :controller
+  config.extend RequestMacros, type: :request
   config.include FactoryGirl::Syntax::Methods
 
   config.before(:all) do

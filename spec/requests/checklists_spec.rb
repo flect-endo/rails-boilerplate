@@ -1,6 +1,8 @@
 require 'rails_helper'
 
 RSpec.describe "Checklists", type: :request do
+  login_admin
+
   describe "GET /checklists" do
     it "works! (now write some real specs)" do
       get checklists_path
