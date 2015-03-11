@@ -9,8 +9,12 @@ Rails.application.routes.draw do
       delete 'destroy_all'
     end
   end
-  get 'salesforce/index'
-  get 'salesforce/credentials'
+  resources :salesforce, only: [:index] do
+    collection do
+      get 'credentials'
+      post 'onload'
+    end
+  end
 
   devise_for :users, controllers: { sessions: "users/sessions" }
   devise_scope :user do
