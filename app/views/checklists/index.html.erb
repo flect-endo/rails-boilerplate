@@ -9,6 +9,11 @@
 <%= link_to t('.new', :default => t("helpers.links.new")),
             new_checklist_path,
             :class => 'btn btn-primary' %>
+<%= link_to t('.new', :default => t("helpers.links.destroy_all")),
+            destroy_all_checklists_path,
+            :method => :delete,
+            :data => { :confirm => t('.confirm', :default => t("helpers.links.confirm", :default => 'Are you sure?')) },
+            :class => 'btn btn-danger' %>
 
 <h2>CSVアップロード</h2>
 
