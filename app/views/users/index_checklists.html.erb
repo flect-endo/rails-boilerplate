@@ -1,0 +1,24 @@
+<div class="page-header">
+  <h1><%= t("users.index_checklists.title") %></h1>
+</div>
+<table class="table table-striped">
+  <thead>
+    <tr>
+      <th><%= Checklist.human_attribute_name(:title) %></th>
+      <th><%= UserChecklist.human_attribute_name(:date) %></th>
+      <th><%= UserChecklist.human_attribute_name(:checked) %></th>
+      <th><%=t '.actions', :default => t("helpers.actions") %></th>
+    </tr>
+  </thead>
+  <tbody>
+    <% @user.user_checklists.each do |item| %>
+      <tr>
+        <td><%= item.checklist.title %></td>
+        <td><%=l item.date %></td>
+        <td><%= boolean_glyph(item.checked) %></td>
+        <td>
+        </td>
+      </tr>
+    <% end %>
+  </tbody>
+</table>
