@@ -2,7 +2,7 @@
   <div class="alert alert-success" role="alert"><strong>OK</strong></div>
   <ul>
   <% (success[:recentItems] || []).each do |index, item| %>
-    <li><%= item["attributes"]["Id"] %> : <%= item["attributes"]["Name"] %></li>
+    <li><%= item %><br /><%= item["attributes"]["Id"] %> : <%= item["attributes"]["Name"] %></li>
   <% end %>
   </ul>
 <% end %>
