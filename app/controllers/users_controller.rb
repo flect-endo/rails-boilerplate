@@ -38,12 +38,21 @@ class UsersController < ApplicationController
     checked_ids = params[:user][:user_checklists]
     checked_items, unchecked_items = checklists.partition {|item| checked_ids.include? item.id.to_s }
 
-    now = Time.current
+    now = Time.at(Time.current.to_i)
     @user.user_checklists << checked_items.map {|item| UserChecklist.new(user: @user, checklist: item, datetime: now, checked: true) }
     @user.user_checklists << unchecked_items.map {|item| UserChecklist.new(user: @user, checklist: item, datetime: now, checked: false) }
 
     respond_to do |format|
       format.html { redirect_to checklists_user_url, notice: 'User checlists were successfully updated.' }
+      format.json { head :no_content }
+    end
+  end
+
+  def destroy_checklists
+    datetime = Time.strptime(params[:datetime], "%Y-%m-%d-%H-%M-%S") rescue nil
+    UserChecklist.where(user: @user, datetime: datetime).destroy_all
+    respond_to do |format|
+      format.html { redirect_to checklists_user_url, notice: 'User checlists were successfully destroyed.' }
       format.json { head :no_content }
     end
   end

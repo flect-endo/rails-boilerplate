@@ -8,9 +8,16 @@
     <div class="panel panel-default">
       <div class="panel-heading" role="tab" id="heading<%= date_key %>">
         <h4 class="panel-title">
-          <a class="collapsed" data-toggle="collapse" data-parent="#accordion" href="#collapse<%= date_key %>" aria-expanded="false" aria-controls="collapse<%= date_key %>">
+          <a class="collapsed text-left" data-toggle="collapse" data-parent="#accordion" href="#collapse<%= date_key %>" aria-expanded="false" aria-controls="collapse<%= date_key %>">
             <%= datetime.nil? ? "undefined" : l(datetime) %>
           </a>
+          <p class="pull-right">
+            <%= link_to t('.destroy', :default => t("helpers.links.destroy")),
+                        destroy_checklists_user_path(current_user, datetime: date_key),
+                        :method => :delete,
+                        # :data => { :confirm => t('.confirm', :default => t("helpers.links.confirm", :default => 'Are you sure?')) },
+                        :class => 'btn btn-xs btn-danger' %>
+          </p>
         </h4>
       </div>
       <div id="collapse<%= date_key %>" class="panel-collapse collapse" role="tabpanel" aria-labelledby="heading<%= date_key %>">
