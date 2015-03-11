@@ -10,32 +10,8 @@ class User < ActiveRecord::Base
 
   # OAuth 経由で Salesforce ログインしてきた場合のユーザ情報を取得する
   def self.find_or_create_with_omniauth(auth)
-    user = where(provider: auth["provider"], uid: auth["uid"]).first
-    return user if user.present?
-
-    user = where(email: auth["info"]["email"]).first
-    if user.nil?
-      user = User.new(
-        email: auth["info"]["email"],
-        # FIXME: Devise デフォルトの encrypted_password を回避するための応急処置
-        password: "password",
-        password_confirmation: "password",
-
-        provider: auth["provider"],
-        uid: auth["uid"],
-        name: auth["info"]["name"],
-        nickname: auth["info"]["nickname"]
-      )
-      # メールアドレスの確認はスキップ(Force.com ログイン可能な時点で住んでいるものとみなす)
-      user.skip_confirmation!
-    else
-      user.provider = auth["provider"]
-      user.uid = auth["uid"]
-      user.name = auth["info"]["name"]
-      user.nickname = auth["info"]["nickname"]
-    end
-    user.save!
-    user
+    find_or_create_for_auth(auth["provider"], auth["uid"], auth["info"]["email"],
+        auth["info"]["name"], auth["info"]["nickname"])
   end
 
   # Force.com Canvasからの署名付き要求でログインするためのユーザ情報を取得する
@@ -44,29 +20,7 @@ class User < ActiveRecord::Base
     provider = "salesforce"
     uid = "#{context['links']['loginUrl']}id/#{context['organization']['organizationId']}/#{context['user']['userId']}"
 
-    user = where(provider: provider, uid: uid).first
-    return user if user.present?
-
-    user = where(email: context['user']['userName']).first
-    if user.nil?
-      user = User.new(
-        email: context['user']['userName'],
-        # FIXME: Devise デフォルトの encrypted_password を回避するための応急処置
-        password: "password",
-        password_confirmation: "password",
-        provider: provider,
-        uid: uid,
-        name: context['user']['userName']
-      )
-      # メールアドレスの確認はスキップ(Force.com ログイン可能な時点で住んでいるものとみなす)
-      user.skip_confirmation!
-    else
-      user.provider = provider
-      user.uid = uid
-      user.name = context['user']['userName']
-    end
-    user.save!
-    user
+    find_or_create_for_auth(provider, uid, context['user']['userName'], context['user']['userName'])
   end
 
   def logged_in_from_salesforce?
@@ -104,5 +58,32 @@ class User < ActiveRecord::Base
 
   def delete_authentication_token
     self.update(authentication_token: nil)
+  end
+
+  # Devise のサインアップではなく OAuth などの別経路でユーザがログインしてきた時の処理
+  def self.find_or_create_for_auth(provider, uid, email, username, nickname="")
+    user = where(provider: provider, uid: uid).first
+    return user if user.present?
+
+    user = where(email: email).first
+    if user.nil?
+      user = User.new(
+        email: email,
+        password: Devise.friendly_token[0, 20],
+        provider: provider,
+        uid: uid,
+        name: username,
+        nickname: nickname
+      )
+      # メールアドレスの確認はスキップ(Force.com ログイン可能な時点で住んでいるものとみなす)
+      user.skip_confirmation!
+    elsif user.provider.blank?
+      user.provider = provider
+      user.uid = uid
+      user.name = username
+      user.nickname = nickname
+    end
+    user.save!
+    user
   end
 end
