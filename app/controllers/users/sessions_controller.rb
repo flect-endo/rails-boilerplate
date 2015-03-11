@@ -1,7 +1,7 @@
 require 'restforce'
 
 class Users::SessionsController < Devise::SessionsController
-  protect_from_forgery except: :index_auth
+  protect_from_forgery except: :auth_signed_request
 
   # OAuth 認証からのコールバック
   def callback
