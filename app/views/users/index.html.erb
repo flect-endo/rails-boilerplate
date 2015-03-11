@@ -22,6 +22,10 @@
         <td><%= user.provider %></td>
         <td><%=l user.created_at %></td>
         <td>
+          <%= link_to t("users.index_checklists.title"),
+                      checklists_user_path(user), :class => 'btn btn-default btn-xs' %>
+          <%= link_to t("users.new_checklists.title"),
+                      checklists_new_user_path(user), :class => 'btn btn-primary btn-xs' %>
           <%= link_to t('.destroy', :default => t("helpers.links.destroy")),
                       user_path(user),
                       :method => :delete,

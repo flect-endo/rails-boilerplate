@@ -1,0 +1,36 @@
+<div class="page-header">
+  <h1><%= t("users.new_checklists.title") %></h1>
+</div>
+<%= form_for @user, url: checklists_user_path, html: { class: "form-horizontal user" } do |f| %>
+
+    <% if @user.errors.any? %>
+    <div id="error_expl" class="panel panel-danger">
+      <div class="panel-heading">
+        <h3 class="panel-title"><%= pluralize(@user.errors.count, "error") %> prohibited this user from being saved:</h3>
+      </div>
+      <div class="panel-body">
+        <ul>
+        <% @user.errors.full_messages.each do |msg| %>
+          <li><%= msg %></li>
+        <% end %>
+        </ul>
+      </div>
+    </div>
+  <% end %>
+
+  <div class="control-group">
+    <%= f.label :user_id, :class => 'control-label' %>
+    <div class="controls">
+      <%= f.collection_check_boxes(:user_checklists, @checklists, :id, :title) do |b| %>
+        <div class="checkbox">
+          <%= b.label { b.check_box + b.text } %>
+        </div>
+      <% end %>
+   </div>
+  </div>
+
+  <%= f.submit nil, :class => 'btn btn-primary' %>
+  <%= link_to t('.cancel', :default => t("helpers.links.cancel")),
+            users_path, :class => 'btn btn-default' %>
+
+<% end %>
