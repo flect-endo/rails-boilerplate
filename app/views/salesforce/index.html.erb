@@ -11,21 +11,59 @@
       },
       dataType: 'json',
       success: function(data) {
-        console.log("success!");
-        console.log(data);
+        $.ajax({
+          url: "/salesforce/onload",
+          type: 'post',
+          data: { success: data }
+        });
       },
       error: function(xhr, textStatus, errorThrown) {
-        console.log("error");
-        console.log(textStatus);
-        console.log(errorThrown);
+        console.log(xhr);
+        $.ajax({
+          url: "/salesforce/onload",
+          type: 'post',
+          data: { error: { responseText: xhr.responseText, statusText: xhr.statusText } }
+        });
       },
       complete: function(xhr, textStatus) {
-        console.log("complete!");
+        // do nothing.
       }
     });
-
   });
 </script>
 <% end %>
 
-aaaaa
+<div class="page-header">
+  <h1>取引先 <span class="badge">Ajax版</span></h1>
+</div>
+
+<div id="ajax">読み込み中</div>
+
+<div class="page-header">
+  <h1>取引先 <span class="badge">Rubyクライアント版</span></h1>
+</div>
+
+<table class="table table-striped">
+  <thead>
+    <tr>
+      <th>取引先ID</th>
+      <th>取引先名</th>
+      <th>取引先責任者名</th>
+    </tr>
+  </thead>
+  <tbody>
+    <% @accounts.each do |account| %>
+      <tr>
+        <td><%= account.Id %></td>
+        <td><%= account.Name %></td>
+        <td>
+        <ul>
+        <% (account.Contacts || []).each do |contact| %>
+          <li><%= contact.Name %></li>
+        <% end %>
+        </ul>
+        </td>
+      </tr>
+    <% end %>
+  </tbody>
+</table>
