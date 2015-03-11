@@ -7,6 +7,11 @@ module ApplicationHelper
     end
   end
 
+  def boolean_glyph(boolean_value)
+    boolean_value ? (content_tag :i, "", class: ["glyphicon", "glyphicon-ok", "text-success"])
+                  : (content_tag :i, "", class: ["glyphicon", "glyphicon-remove", "text-danger"])
+  end
+
   def bootstrap_flash(options = {})
     flash_messages = []
     flash.each do |type, message|

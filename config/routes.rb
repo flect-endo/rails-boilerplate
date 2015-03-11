@@ -20,7 +20,13 @@ Rails.application.routes.draw do
   end
   get '/signout' => 'users/sessions#destroy', as: :signout
 
-  resources :users
+  resources :users do
+    member do
+      get 'checklists', action: :index_checklists
+      get 'checklists/new', action: :new_checklists
+      match 'checklists', to: 'users#create_checklists', via: [:post, :put, :patch]
+    end
+  end
 
   resource :authentication_token, only: [:update, :destroy]
 

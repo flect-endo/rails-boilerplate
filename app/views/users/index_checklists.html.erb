@@ -1,0 +1,32 @@
+<div class="page-header">
+  <h1><%= t("users.index_checklists.title") %></h1>
+</div>
+
+<% @checklist_report.each do |date, checklists| %>
+  <% date_key = date.strftime("%Y-%m-%d") %>
+  <div class="panel-group" id="accordion" role="tablist" aria-multiselectable="true">
+    <div class="panel panel-default">
+      <div class="panel-heading" role="tab" id="heading<%= date_key %>">
+        <h4 class="panel-title">
+          <a class="collapsed" data-toggle="collapse" data-parent="#accordion" href="#collapse<%= date_key %>" aria-expanded="false" aria-controls="collapse<%= date_key %>">
+            <%=l date %>
+          </a>
+        </h4>
+      </div>
+      <div id="collapse<%= date_key %>" class="panel-collapse collapse" role="tabpanel" aria-labelledby="heading<%= date_key %>">
+        <div class="panel-body">
+          <table class="table table-striped">
+            <tbody>
+              <% checklists.each do |item| %>
+                <tr>
+                  <td><%= item.try(:checklist).try(:title) || "ID-#{item.checklist_id}" %></td>
+                  <td><%= boolean_glyph(item.checked) %></td>
+                </tr>
+              <% end %>
+            </tbody>
+          </table>
+        </div>
+      </div>
+    </div>
+  </div>
+<% end %>

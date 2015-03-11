@@ -2,6 +2,9 @@ ja:
   time:
     formats:
       default: "%Y/%m/%d %H:%M"
+  date:
+    formats:
+      default: "%Y/%m/%d"
   button:
     submti: "登録"
     create: "作成"
@@ -26,6 +29,8 @@ ja:
       edit: "編集"
       destroy: "削除"
       destroy_all: "全件削除"
+      new_report: "新規レポート"
+      report: "レポート"
   common:
     models:
       map: "マップ"
@@ -43,6 +48,10 @@ ja:
   users:
     index:
       title: "ユーザ一覧"
+    index_checklists:
+      title: "チェック項目レポート"
+    new_checklists:
+      title: "新規チェックリスト作成"
   checklists:
     index:
       title: "チェック項目一覧"
