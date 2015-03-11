@@ -71,6 +71,7 @@ group :development, :test do
   gem 'spring'
 
   gem 'rspec-rails'
+  gem 'rspec-its'
   gem 'factory_girl_rails'
 
   gem "better_errors"
