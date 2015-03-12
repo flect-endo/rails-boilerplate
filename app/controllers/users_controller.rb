@@ -25,7 +25,7 @@ class UsersController < ApplicationController
   end
 
   def index_checklists
-    @checklist_report = @user.user_checklists.group_by { |item| item.datetime }
+    @checklist_report = @user.user_checklists.includes(:checklist).group_by { |item| item.datetime }
   end
 
   def new_checklists
@@ -50,7 +50,7 @@ class UsersController < ApplicationController
 
   def destroy_checklists
     datetime = Time.strptime(params[:datetime], "%Y-%m-%d-%H-%M-%S") rescue nil
-    UserChecklist.where(user: @user, datetime: datetime).destroy_all
+    UserChecklist.where(user: @user, datetime: datetime).delete_all
     respond_to do |format|
       format.html { redirect_to checklists_user_url, notice: 'User checlists were successfully destroyed.' }
       format.json { head :no_content }
