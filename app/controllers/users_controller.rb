@@ -35,8 +35,8 @@ class UsersController < ApplicationController
   def create_checklists
     checklists = Checklist.all
     # 画面上でチェックした項目IDだけが渡ってくる
-    checked_ids = params[:user][:user_checklists]
-    checked_items, unchecked_items = checklists.partition {|item| checked_ids.include? item.id.to_s }
+    checked_ids = params[:user][:user_checklists].reject(&:blank?).map { |id| id.to_i }
+    checked_items, unchecked_items = checklists.partition {|item| checked_ids.include? item.id }
 
     now = Time.at(Time.current.to_i)
     @user.user_checklists << checked_items.map {|item| UserChecklist.new(user: @user, checklist: item, datetime: now, checked: true) }
