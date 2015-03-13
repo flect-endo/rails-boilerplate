@@ -31,6 +31,8 @@ ja:
       destroy_all: "全件削除"
       new_report: "新規レポート"
       report: "レポート"
+      start_work: "作業開始"
+      end_work: "作業終了"
   common:
     models:
       map: "マップ"
@@ -48,6 +50,8 @@ ja:
   users:
     index:
       title: "ユーザ一覧"
+    index_attendances:
+      title: "日報"
     index_checklists:
       title: "チェック項目レポート"
     new_checklists:

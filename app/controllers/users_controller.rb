@@ -34,10 +34,18 @@ class UsersController < ApplicationController
 
   def start_work
     @user.start_work
+    respond_to do |format|
+      format.html { redirect_to attendances_user_url, notice: 'Operation for staring work was successfully done.' }
+      format.json { head :ok }
+    end
   end
 
   def end_work
     @user.end_work
+    respond_to do |format|
+      format.html { redirect_to attendances_user_url, notice: 'Operation for ending work was successfully done.' }
+      format.json { head :ok }
+    end
   end
 
   def new_checklists

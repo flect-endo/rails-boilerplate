@@ -28,8 +28,10 @@ Rails.application.routes.draw do
     member do
       # 日報・勤怠管理
       get 'attendances', action: :index_attendances
-      post 'attendances/start', action: :start_work
-      post 'attendances/end', action: :end_work
+      # post 'attendances/start', action: :start_work
+      # post 'attendances/end', action: :end_work
+      match 'attendances/start', to: 'users#start_work', via: [:get, :post]
+      match 'attendances/end', to: 'users#end_work', via: [:get, :post]
 
       # チェック項目
       get 'checklists', action: :index_checklists
