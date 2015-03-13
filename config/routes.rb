@@ -26,6 +26,12 @@ Rails.application.routes.draw do
 
   resources :users do
     member do
+      # 日報・勤怠管理
+      get 'attendances', action: :index_attendances
+      post 'attendances/start', action: :start_work
+      post 'attendances/end', action: :end_work
+
+      # チェック項目
       get 'checklists', action: :index_checklists
       get 'checklists/new', action: :new_checklists
       match 'checklists', to: 'users#create_checklists', via: [:post, :put, :patch]

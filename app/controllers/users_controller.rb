@@ -1,7 +1,7 @@
 class UsersController < ApplicationController
   before_action :authenticate_user!
   load_and_authorize_resource
-  before_action :set_user, only: [:show, :destroy, :index_checklists, :new_checklists, :create_checklists]
+  before_action :set_user, except: [:index]
 
   # GET /users
   # GET /users.json
@@ -24,8 +24,20 @@ class UsersController < ApplicationController
     end
   end
 
+  def index_attendances
+    @attendances = @user.attendances
+  end
+
   def index_checklists
     @checklist_report = @user.user_checklists.includes(:checklist).group_by { |item| item.datetime }
+  end
+
+  def start_work
+    @user.start_work
+  end
+
+  def end_work
+    @user.end_work
   end
 
   def new_checklists
