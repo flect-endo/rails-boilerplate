@@ -31,6 +31,55 @@ RSpec.describe User, type: :model do
     }
   }
 
+  describe "作業記録" do
+    let(:now) { Time.local(2015, 3, 13, 12, 0, 0) }
+    let(:today) { Date.new(2015, 3, 13) }
+    before {
+      Time.stub(:current).and_return(now)
+      Date.stub(:today).and_return(today)
+    }
+
+    describe "作業開始" do
+      context "未開始時" do
+        let(:user) { create(:user) }
+        subject {
+          user.start_work
+        }
+        its(:date) { is_expected.to eql today }
+        its(:started_at) { is_expected.to eql now }
+        its(:ended_at) { is_expected.to be_nil }
+      end
+
+      context "開始済み" do
+        let(:user) { create(:user) }
+        before {
+          Attendance.create(user: user, date: today, started_at: Time.local(2015, 3, 13, 9, 0, 0))
+        }
+        subject {
+          user.start_work
+        }
+        its(:date) { is_expected.to eql today }
+        its(:started_at) { is_expected.to eql Time.local(2015, 3, 13, 9, 0, 0) }
+        its(:ended_at) { is_expected.to be_nil }
+      end
+    end
+
+    describe "作業終了" do
+      context "開始済み" do
+        let(:user) { create(:user) }
+        before {
+          Attendance.create(user: user, date: today, started_at: Time.local(2015, 3, 13, 9, 0, 0))
+        }
+        subject {
+          user.end_work
+        }
+        its(:date) { is_expected.to eql today }
+        its(:started_at) { is_expected.to eql Time.local(2015, 3, 13, 9, 0, 0) }
+        its(:ended_at) { is_expected.to eql now }
+      end
+    end
+  end
+
   describe "OAuth経由でのSalesforceログイン時" do
     context "標準フォームから作成された既存ユーザがいる場合" do
       before {

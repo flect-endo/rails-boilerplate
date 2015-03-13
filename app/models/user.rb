@@ -7,6 +7,21 @@ class User < ActiveRecord::Base
   validates :authentication_token, uniqueness: true, allow_nil: true
   has_many :notes, dependent: :delete_all
   has_many :user_checklists, dependent: :delete_all
+  has_many :attendances, dependent: :delete_all
+
+  def start_work
+    Attendance.where(user: self, date: Date.today).first \
+    || Attendance.create!(user: self, date: Date.today, started_at: Time.current)
+  end
+
+  def end_work
+    attendance = Attendance.where(user: self, date: Date.today).first
+    raise "not start" if attendance.nil?
+    raise "already end" if attendance.ended_at.present?
+
+    attendance.update_attributes!(ended_at: Time.current)
+    attendance
+  end
 
   # OAuth 経由で Salesforce ログインしてきた場合のユーザ情報を取得する
   def self.find_or_create_with_omniauth(auth)
