@@ -1,7 +1,7 @@
 class UsersController < ApplicationController
   before_action :authenticate_user!
   load_and_authorize_resource
-  before_action :set_user, only: [:show, :destroy, :index_checklists, :new_checklists, :create_checklists]
+  before_action :set_user, except: [:index]
 
   # GET /users
   # GET /users.json

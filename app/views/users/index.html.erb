@@ -22,6 +22,8 @@
         <td><%= user.provider %></td>
         <td><%=l user.created_at %></td>
         <td>
+          <%= link_to t("users.index_attendances.title"),
+                      user_attendances_path(user), :class => 'btn btn-default btn-xs' %>
           <%= link_to t("users.index_checklists.title"),
                       checklists_user_path(user), :class => 'btn btn-default btn-xs' %>
           <%= link_to t("users.new_checklists.title"),

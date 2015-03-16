@@ -25,7 +25,15 @@ Rails.application.routes.draw do
   get '/signout' => 'users/sessions#destroy', as: :signout
 
   resources :users do
+    resources :attendances, only: [:index] do
+      collection do
+        match 'clock_in', via: [:get, :post], as: 'clock_in'
+        match 'clock_out', via: [:get, :post], as: 'clock_out'
+        delete ':date', action: 'destroy'
+      end
+    end
     member do
+      # チェック項目
       get 'checklists', action: :index_checklists
       get 'checklists/new', action: :new_checklists
       match 'checklists', to: 'users#create_checklists', via: [:post, :put, :patch]
