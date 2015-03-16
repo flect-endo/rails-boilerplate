@@ -9,7 +9,6 @@ class Attendance < ActiveRecord::Base
   def self.clock_out(user)
     attendance = Attendance.where(user: user, date: Date.today).first
     raise "not start" if attendance.nil?
-    raise "already end" if attendance.ended_at.present?
 
     attendance.update_attributes!(ended_at: Time.current)
     attendance

@@ -20,6 +20,11 @@
           <a class="collapsed text-left" data-toggle="collapse" data-parent="#accordion" href="#collapse<%= date_key %>" aria-expanded="false" aria-controls="collapse<%= date_key %>">
             <%= l(attendance.date) %>
           </a>
+          &nbsp;
+          <span class="label label-info">開始: <%=l attendance.started_at %></span>
+          <% if attendance.ended_at.present? %>
+          <span class="label label-info">終了: <%=l attendance.ended_at %></span>
+          <% end %>
           <p class="pull-right">
             <%= link_to t('.destroy', :default => t("helpers.links.destroy")),
                         user_attendances_path(user_id: current_user, date: date_key),
@@ -32,8 +37,7 @@
       <div id="collapse<%= date_key %>" class="panel-collapse collapse" role="tabpanel" aria-labelledby="heading<%= date_key %>">
         <div class="panel-body">
           <ul>
-            <li>開始: <%=l attendance.started_at if attendance.started_at.present? %></li>
-            <li>終了: <%=l attendance.ended_at if attendance.ended_at.present? %></li>
+            <!-- 内訳 -->
           </ul>
         </div>
       </div>
