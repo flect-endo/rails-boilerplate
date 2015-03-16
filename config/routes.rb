@@ -29,7 +29,7 @@ Rails.application.routes.draw do
       collection do
         match 'clock_in', via: [:get, :post], as: 'clock_in'
         match 'clock_out', via: [:get, :post], as: 'clock_out'
-        delete 'destroy'
+        delete ':date', action: 'destroy'
       end
     end
     member do
