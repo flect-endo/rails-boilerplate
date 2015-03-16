@@ -68,6 +68,15 @@ class UsersController < ApplicationController
     end
   end
 
+  def destroy_attendance
+    date = Date.strptime(params[:date], "%Y-%m-%d") rescue nil
+    Attendance.where(user: @user, date: date).delete_all
+    respond_to do |format|
+      format.html { redirect_to attendances_user_url, notice: 'User attendance was successfully destroyed.' }
+      format.json { head :no_content }
+    end
+  end
+
   def destroy_checklists
     datetime = Time.strptime(params[:datetime], "%Y-%m-%d-%H-%M-%S") rescue nil
     UserChecklist.where(user: @user, datetime: datetime).delete_all

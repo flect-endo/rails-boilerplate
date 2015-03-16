@@ -32,6 +32,7 @@ Rails.application.routes.draw do
       # post 'attendances/end', action: :end_work
       match 'attendances/start', to: 'users#start_work', via: [:get, :post]
       match 'attendances/end', to: 'users#end_work', via: [:get, :post]
+      delete 'attendances/:date', action: :destroy_attendance, as: :destroy_attendance
 
       # チェック項目
       get 'checklists', action: :index_checklists
