@@ -25,15 +25,14 @@ Rails.application.routes.draw do
   get '/signout' => 'users/sessions#destroy', as: :signout
 
   resources :users do
+    resources :attendances, only: [:index] do
+      collection do
+        match 'clock_in', via: [:get, :post], as: 'clock_in'
+        match 'clock_out', via: [:get, :post], as: 'clock_out'
+        delete 'destroy'
+      end
+    end
     member do
-      # 日報・勤怠管理
-      get 'attendances', action: :index_attendances
-      # post 'attendances/start', action: :start_work
-      # post 'attendances/end', action: :end_work
-      match 'attendances/start', to: 'users#start_work', via: [:get, :post]
-      match 'attendances/end', to: 'users#end_work', via: [:get, :post]
-      delete 'attendances/:date', action: :destroy_attendance, as: :destroy_attendance
-
       # チェック項目
       get 'checklists', action: :index_checklists
       get 'checklists/new', action: :new_checklists
@@ -41,6 +40,12 @@ Rails.application.routes.draw do
       delete 'checklists/:datetime', action: :destroy_checklists, as: :destroy_checklists
     end
   end
+
+  # 日報・勤怠管理
+  # get 'users/:user_id/attendances', to: 'attendances#index'
+  # delete 'users/:user_id/attendances/:date', to: 'attendances#destroy', as: 'destroy_attendance'
+  # match 'users/:user_id/clock_in', to: 'attendances#clock_in', via: [:get, :post], as: 'clock_in'
+  # match 'users/:user_id/clock_out', to: 'attendances#clock_out', via: [:get, :post], as: 'clock_out'
 
   resource :authentication_token, only: [:update, :destroy]
 

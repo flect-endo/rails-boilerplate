@@ -24,28 +24,8 @@ class UsersController < ApplicationController
     end
   end
 
-  def index_attendances
-    @attendances = @user.attendances
-  end
-
   def index_checklists
     @checklist_report = @user.user_checklists.includes(:checklist).group_by { |item| item.datetime }
-  end
-
-  def start_work
-    @user.start_work
-    respond_to do |format|
-      format.html { redirect_to attendances_user_url, notice: 'Operation for staring work was successfully done.' }
-      format.json { head :ok }
-    end
-  end
-
-  def end_work
-    @user.end_work
-    respond_to do |format|
-      format.html { redirect_to attendances_user_url, notice: 'Operation for ending work was successfully done.' }
-      format.json { head :ok }
-    end
   end
 
   def new_checklists
@@ -64,15 +44,6 @@ class UsersController < ApplicationController
 
     respond_to do |format|
       format.html { redirect_to checklists_user_url, notice: 'User checlists were successfully updated.' }
-      format.json { head :no_content }
-    end
-  end
-
-  def destroy_attendance
-    date = Date.strptime(params[:date], "%Y-%m-%d") rescue nil
-    Attendance.where(user: @user, date: date).delete_all
-    respond_to do |format|
-      format.html { redirect_to attendances_user_url, notice: 'User attendance was successfully destroyed.' }
       format.json { head :no_content }
     end
   end
