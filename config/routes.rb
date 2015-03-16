@@ -41,12 +41,6 @@ Rails.application.routes.draw do
     end
   end
 
-  # 日報・勤怠管理
-  # get 'users/:user_id/attendances', to: 'attendances#index'
-  # delete 'users/:user_id/attendances/:date', to: 'attendances#destroy', as: 'destroy_attendance'
-  # match 'users/:user_id/clock_in', to: 'attendances#clock_in', via: [:get, :post], as: 'clock_in'
-  # match 'users/:user_id/clock_out', to: 'attendances#clock_out', via: [:get, :post], as: 'clock_out'
-
   resource :authentication_token, only: [:update, :destroy]
 
   get 'map' => 'map#index'
