@@ -1,5 +1,6 @@
 class Attendance < ActiveRecord::Base
   belongs_to :user
+  has_many :time_entries, dependent: :delete_all
 
   def self.clock_in(user, date=Date.today, started_at=Time.current)
     where(user: user, date: date).first \

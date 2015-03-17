@@ -9,6 +9,12 @@
 <%= link_to t("helpers.links.end_work"),
             clock_out_user_attendances_path(user_id: @user),
             :class => 'btn btn-primary' %>
+<%= link_to t("helpers.links.start_task"),
+            time_entries_start_user_attendances_path(user_id: @user),
+            :class => 'btn btn-warning' %>
+<%= link_to t("helpers.links.finish_task"),
+            time_entries_finish_user_attendances_path(user_id: @user),
+            :class => 'btn btn-warning' %>
 </p>
 
 <% @attendances.each do |attendance| %>
@@ -37,7 +43,13 @@
       <div id="collapse<%= date_key %>" class="panel-collapse collapse" role="tabpanel" aria-labelledby="heading<%= date_key %>">
         <div class="panel-body">
           <ul>
-            <!-- 内訳 -->
+            <% attendance.time_entries.each do |entry| %>
+            <li>
+              開始: <%=l entry.started_at %>
+              <% if entry.ended_at.present? %>
+              , 終了: <%= l entry.ended_at %>
+              <% end %>
+            <% end %>
           </ul>
         </div>
       </div>
