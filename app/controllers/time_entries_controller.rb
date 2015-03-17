@@ -14,9 +14,15 @@ class TimeEntriesController < ApplicationController
 
   def finish
     entry = @attendance.time_entries.order("started_at DESC").first
-    entry.update_attributes!(ended_at: Time.current)
+    if entry.present? and entry.ended_at.nil?
+      entry.update_attributes!(ended_at: Time.current)
+      option = { notice: 'Operation for finishing task was successfully done.' }
+    else
+      option = { alert: 'Not started or Already finished.' }
+    end
+
     respond_to do |format|
-      format.html { redirect_to index_url, notice: 'Operation for finishing task was successfully done.' }
+      format.html { redirect_to index_url, option }
       format.json { head :ok }
     end
   end
