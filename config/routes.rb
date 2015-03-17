@@ -29,7 +29,9 @@ Rails.application.routes.draw do
       collection do
         match 'clock_in', via: [:get, :post], as: 'clock_in'
         match 'clock_out', via: [:get, :post], as: 'clock_out'
-        delete ':date', action: 'destroy'
+        delete ':date', action: 'destroy', constraints: { date: /\d{4}-\d{2}-\d{2}/ }
+        match 'time_entries/start', to: 'time_entries#start', via: [:get, :post]
+        match 'time_entries/finish', to: 'time_entries#finish', via: [:get, :post]
       end
     end
     resources :user_checklists, only: [:index, :new] do

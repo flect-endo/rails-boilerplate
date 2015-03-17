@@ -33,6 +33,8 @@ ja:
       report: "レポート"
       start_work: "作業開始"
       end_work: "作業終了"
+      start_task: "開始"
+      finish_task: "終了"
   common:
     models:
       map: "マップ"

@@ -9,6 +9,12 @@
 <%= link_to t("helpers.links.end_work"),
             clock_out_user_attendances_path(user_id: @user),
             :class => 'btn btn-primary' %>
+<%= link_to t("helpers.links.start_task"),
+            time_entries_start_user_attendances_path(user_id: @user),
+            :class => 'btn btn-warning' %>
+<%= link_to t("helpers.links.finish_task"),
+            time_entries_finish_user_attendances_path(user_id: @user),
+            :class => 'btn btn-warning' %>
 </p>
 
 <% @attendances.each do |attendance| %>
@@ -21,9 +27,9 @@
             <%= l(attendance.date) %>
           </a>
           &nbsp;
-          <span class="label label-info">開始: <%=l attendance.started_at %></span>
+          <span class="label label-success">開始: <%=l attendance.started_at %></span>
           <% if attendance.ended_at.present? %>
-          <span class="label label-info">終了: <%=l attendance.ended_at %></span>
+          <span class="label label-success">終了: <%=l attendance.ended_at %></span>
           <% end %>
           <p class="pull-right">
             <%= link_to t('.destroy', :default => t("helpers.links.destroy")),
@@ -37,7 +43,13 @@
       <div id="collapse<%= date_key %>" class="panel-collapse collapse" role="tabpanel" aria-labelledby="heading<%= date_key %>">
         <div class="panel-body">
           <ul>
-            <!-- 内訳 -->
+            <% attendance.time_entries.each do |entry| %>
+            <li>
+              開始: <%=l entry.started_at %>
+              <% if entry.ended_at.present? %>
+              , 終了: <%= l entry.ended_at %>
+              <% end %>
+            <% end %>
           </ul>
         </div>
       </div>
