@@ -22,7 +22,7 @@ class UserChecklistsController < ApplicationController
     @user.user_checklists << unchecked_items.map {|item| UserChecklist.new(user: @user, checklist: item, datetime: now, checked: false) }
 
     respond_to do |format|
-      format.html { redirect_to checklists_user_url, notice: 'User checlists were successfully updated.' }
+      format.html { redirect_to user_user_checklists_url, notice: 'User checlists were successfully updated.' }
       format.json { head :no_content }
     end
   end
@@ -31,7 +31,7 @@ class UserChecklistsController < ApplicationController
     datetime = Time.strptime(params[:datetime], "%Y-%m-%d-%H-%M-%S") rescue nil
     UserChecklist.where(user: @user, datetime: datetime).delete_all
     respond_to do |format|
-      format.html { redirect_to checklists_user_url, notice: 'User checlists were successfully destroyed.' }
+      format.html { redirect_to user_user_checklists_url, notice: 'User checlists were successfully destroyed.' }
       format.json { head :no_content }
     end
   end

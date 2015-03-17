@@ -32,9 +32,11 @@ Rails.application.routes.draw do
         delete ':date', action: 'destroy'
       end
     end
-    resources :user_checklists, except: [:index, :new] do
-      match '', action: 'create', via: [:post, :put, :patch]
-      delete ':datetime', action: 'destroy'
+    resources :user_checklists, only: [:index, :new] do
+      collection do
+        match '', action: 'create', via: [:post, :put, :patch], as: 'register'
+        delete ':datetime', action: 'destroy'
+      end
     end
   end
 

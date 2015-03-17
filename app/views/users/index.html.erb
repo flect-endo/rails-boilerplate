@@ -25,9 +25,9 @@
           <%= link_to t("users.index_attendances.title"),
                       user_attendances_path(user), :class => 'btn btn-default btn-xs' %>
           <%= link_to t("users.index_checklists.title"),
-                      checklists_user_path(user), :class => 'btn btn-default btn-xs' %>
+                      user_user_checklists_path(user), :class => 'btn btn-default btn-xs' %>
           <%= link_to t("users.new_checklists.title"),
-                      checklists_new_user_path(user), :class => 'btn btn-primary btn-xs' %>
+                      new_user_user_checklist_path(user), :class => 'btn btn-primary btn-xs' %>
           <%= link_to t('.destroy', :default => t("helpers.links.destroy")),
                       user_path(user),
                       :method => :delete,
