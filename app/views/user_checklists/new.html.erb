@@ -1,7 +1,7 @@
 <div class="page-header">
   <h1><%= t("users.new_checklists.title") %></h1>
 </div>
-<%= form_for @user, url: checklists_user_path, html: { class: "form-horizontal user" } do |f| %>
+<%= form_for @user, url: register_user_user_checklists_path, html: { class: "form-horizontal user" } do |f| %>
 
     <% if @user.errors.any? %>
     <div id="error_expl" class="panel panel-danger">
