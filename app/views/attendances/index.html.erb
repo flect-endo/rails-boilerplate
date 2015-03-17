@@ -21,9 +21,9 @@
             <%= l(attendance.date) %>
           </a>
           &nbsp;
-          <span class="label label-info">開始: <%=l attendance.started_at %></span>
+          <span class="label label-success">開始: <%=l attendance.started_at %></span>
           <% if attendance.ended_at.present? %>
-          <span class="label label-info">終了: <%=l attendance.ended_at %></span>
+          <span class="label label-success">終了: <%=l attendance.ended_at %></span>
           <% end %>
           <p class="pull-right">
             <%= link_to t('.destroy', :default => t("helpers.links.destroy")),
