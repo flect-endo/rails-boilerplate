@@ -11,9 +11,6 @@
     <%= f.submit t("button.upload_img"), :class => 'btn btn-primary' %>
   <% end %>
 
-  <h2>アップロード結果</h2>
-  <div id="result"></div>
-
   <h2>一覧</h2>
   <div id="resources">
     <%= render partial: 'resources', locals: { resources: @resources } %>

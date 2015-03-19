@@ -1,7 +1,8 @@
-<% keys = resources.first.keys %>
+<% keys = resources.first.keys.reject {|key| /url/ === key }  %>
 <table class="table table-striped">
   <thead>
     <tr>
+      <th></th>
       <% keys.each do |key| %>
       <th><%= key %></th>
       <% end %>
@@ -11,6 +12,8 @@
   <tbody>
     <% @resources.each do |resource| %>
       <tr>
+        <td><%= link_to cl_image_tag("#{resource['public_id']}.jpg", width: 100, height: 100, crop: :fill),
+                        resource["url"] %></td>
         <% keys.each do |key| %>
           <td><%= format_resource_value(key, resource[key]) %></td>
         <% end %>
