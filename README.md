@@ -7,7 +7,8 @@ Devise + cancancan + RSpecを使ったテンプレート用Railsアプリ
 - Force.com Canvas 署名付きリクエストをデコードして認証を行う
 - Devise + cancancan + Bootstrap の標準的なCRUD
 - Ajax を使った非同期CSVファイルアップロード
-- 外部サービス(Google Maps API)連携
+- Google Maps API 連携
+- Cloudinary連携
 
 ## 準備
 
