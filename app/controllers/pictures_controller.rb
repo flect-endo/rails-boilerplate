@@ -1,6 +1,8 @@
 class PicturesController < ApplicationController
   def index
     @upload_form = UploadForm.new
+
+    @resources = Cloudinary::Api::resources
   end
 
   def upload
