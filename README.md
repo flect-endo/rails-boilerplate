@@ -11,9 +11,10 @@ Devise + cancancan + RSpecを使ったテンプレート用Railsアプリ
 
 ## 準備
 
-以下の環境変数をセットする
+以下の環境変数を必要に応じてセットする。
 
 - ``SMTP_USER_NAME`` : Gmailユーザ名(メールアドレス)
 - ``SMTP_PASSWORD`` : Gmailパスワード
 - ``AUTH_CLIENT_KEY`` : OAuthコンシューマ鍵
 - ``AUTH_CLIENT_SECRET`` : OAuthコンシューマの秘密
+- ``CLOUDINARY_URL`` : Cloudinary URL。"cloudinary://{API_KEY}:{API_SECRET}@{CLOUD_NAME}" の形式。Heroku addonを追加した場合、自動で設定される。
