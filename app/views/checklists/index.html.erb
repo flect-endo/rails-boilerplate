@@ -17,7 +17,7 @@
 
 <h2>CSVアップロード</h2>
 
-<%= form_for @csv_form, url: { action: 'upload' }, html: { multipart: true, remote: true, authenticity_token: true } do |f| %>
+<%= form_for @upload_form, url: { action: 'upload' }, html: { multipart: true, remote: true, authenticity_token: true } do |f| %>
       <%= f.file_field :file, :class => 'form-control' %>
   <%= f.submit t('button.upload_csv'), :class => 'btn btn-primary' %>
 <% end %>

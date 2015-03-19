@@ -6,7 +6,7 @@ class ChecklistsController < ApplicationController
   # GET /checklists.json
   def index
     @checklists = Checklist.all
-    @csv_form = CsvForm.new
+    @upload_form = UploadForm.new
   end
 
   # GET /checklists/1
@@ -74,12 +74,12 @@ class ChecklistsController < ApplicationController
   end
 
   def upload
-    csv_form = CsvForm.new(params[:csv_form])
+    form = UploadForm.new(params[:upload_form])
     @checklists = []
 
     Checklist.transaction do
       Checklist.delete_all
-      csv_form.read do |row|
+      form.read_csv do |row|
         @checklists << Checklist.create!(title: row[0])
       end
     end

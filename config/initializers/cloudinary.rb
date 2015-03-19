@@ -5,14 +5,19 @@
 # 備えて定義しておく。
 # http://cloudinary.com/documentation/rails_additional_topics#configuration_options
 Cloudinary.config do |config|
+  if Rails.application.secrets.cloudinary_url.blank?
+    p "'CLOUDINARY_URL' environment variable is not set."
+  end
+
   conf = (
     /cloudinary:\/\/
     (?<api_key> [a-z0-9]+)
     :
-    (?<api_secret> [a-z0-9\-_]+)
+    (?<api_secret> [a-zA-Z0-9\-_]+)
     @
     (?<cloud_name> [a-z]+)
     /x.match(Rails.application.secrets.cloudinary_url) || { cloud_name: "", api_key: "", api_secret: "" })
+
   config.cloud_name = conf[:cloud_name]
   config.api_key = conf[:api_key]
   config.api_secret = conf[:api_secret]

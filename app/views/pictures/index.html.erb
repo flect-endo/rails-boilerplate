@@ -1,0 +1,15 @@
+<div class="page-header">
+  <h1><%= t("pictures.index.title") %></h1>
+
+  <%= form_for @upload_form, url: { action: 'upload' }, html: { multipart: true, remote: true, authenticity_token: true } do |f| %>
+    <div class="control-group">
+      <%= f.label :file, :class => 'control-label' %>
+      <div class="controls">
+        <%= f.file_field :file, :class => 'form-control' %>
+      </div>
+    </div>
+    <%= f.submit t("button.upload_img"), :class => 'btn btn-primary' %>
+  <% end %>
+
+  <div id="result"></div>
+</div>
