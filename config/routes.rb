@@ -21,7 +21,7 @@ Rails.application.routes.draw do
     end
   end
 
-  resources :pictures, only: [:index] do
+  resources :pictures, only: [:index, :create] do
     collection do
       post 'upload'
       delete ':public_id', action: 'destroy'

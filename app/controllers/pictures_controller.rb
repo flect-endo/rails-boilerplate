@@ -5,6 +5,12 @@ class PicturesController < ApplicationController
     @upload_form = UploadForm.new
   end
 
+  # 画像アップロード
+  def create
+    p " ------------------------ create!"
+    p params
+  end
+
   def destroy
     Cloudinary::Api.delete_resources([params[:public_id]])
     respond_to do |format|
