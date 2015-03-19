@@ -7,7 +7,7 @@ module PicturesHelper
     when "secure_url"
       link_to "HTTPS", value
     when "created_at"
-      l Time.parse(value)
+      l Time.zone.parse(value)
     else
       value
     end

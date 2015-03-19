@@ -15,27 +15,8 @@
   <div id="result"></div>
 
   <h2>一覧</h2>
-  <% resources = @resources["resources"] %>
-  <% keys = resources.first.keys %>
-  <table class="table table-striped">
-    <thead>
-      <tr>
-        <% keys.each do |key| %>
-        <th><%= key %></th>
-        <% end %>
-        <th><%=t '.actions', :default => t("helpers.actions") %></th>
-      </tr>
-    </thead>
-    <tbody>
-      <% resources.each do |resource| %>
-        <tr>
-          <% keys.each do |key| %>
-            <td><%= format_resource_value(key, resource[key]) %></td>
-          <% end %>
-          <td>
-          </td>
-        </tr>
-      <% end %>
-    </tbody>
+  <div id="resources">
+    <%= render partial: 'resources', locals: { resources: @resources } %>
+  </div>
   </table>
 </div>

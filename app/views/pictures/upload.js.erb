@@ -1,1 +1,1 @@
-$("#result").html("<%= j @result.to_json %>");
+$("#resources").html("<%= j render partial: 'resources', locals: { resources: @resources } %>");

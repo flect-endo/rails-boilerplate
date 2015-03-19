@@ -24,6 +24,7 @@ Rails.application.routes.draw do
   resources :pictures, only: [:index] do
     collection do
       post 'upload'
+      delete ':public_id', action: 'destroy'
     end
   end
 

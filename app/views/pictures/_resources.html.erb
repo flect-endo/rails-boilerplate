@@ -1,0 +1,27 @@
+<% keys = resources.first.keys %>
+<table class="table table-striped">
+  <thead>
+    <tr>
+      <% keys.each do |key| %>
+      <th><%= key %></th>
+      <% end %>
+      <th><%=t '.actions', :default => t("helpers.actions") %></th>
+    </tr>
+  </thead>
+  <tbody>
+    <% @resources.each do |resource| %>
+      <tr>
+        <% keys.each do |key| %>
+          <td><%= format_resource_value(key, resource[key]) %></td>
+        <% end %>
+        <td>
+          <%= link_to t('.destroy', :default => t("helpers.links.destroy")),
+                      url_for(action: 'destroy', public_id: resource["public_id"]),
+                      :method => :delete,
+                      :data => { :confirm => t('.confirm', :default => t("helpers.links.confirm", :default => 'Are you sure?')) },
+                      :class => 'btn btn-xs btn-danger' %>
+        </td>
+      </tr>
+    <% end %>
+  </tbody>
+</table>
