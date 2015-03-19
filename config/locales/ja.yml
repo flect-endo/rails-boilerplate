@@ -11,6 +11,7 @@ ja:
     update: "変更"
     destroy: "削除"
     upload_csv: "CSVアップロード"
+    upload_img: "画像アップロード"
     cancel: "キャンセル"
   helpers:
     actions: "アクション"
@@ -65,6 +66,9 @@ ja:
       title: "新規チェック項目"
     edit:
       title: "チェック項目編集"
+  pictures:
+    index:
+      title: "画像"
   salesforce:
     index:
       title: "Salesforce"

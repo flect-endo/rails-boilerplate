@@ -56,6 +56,9 @@ gem 'activerecord-session_store'
 # for Ajax file upload
 gem 'remotipart'
 
+# cloudinary
+gem 'cloudinary'
+
 group :development do
   gem 'letter_opener_web'
 end

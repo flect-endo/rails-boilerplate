@@ -1,18 +1,30 @@
 Rails.application.routes.draw do
+  get 'pictures/index'
+
   root 'home#index'
 
   get 'home/index'
+
   resources :notes
+
   resources :checklists do
     collection do
       post 'upload'
       delete 'destroy_all'
     end
   end
+
   resources :salesforce, only: [:index] do
     collection do
       get 'credentials'
       post 'onload'
+    end
+  end
+
+  resources :pictures, only: [:index, :create] do
+    collection do
+      post 'upload'
+      delete ':public_id', action: 'destroy'
     end
   end
 

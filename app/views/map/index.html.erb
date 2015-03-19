@@ -113,7 +113,7 @@
       <div id="map" data-tap-disabled="true" style="width: 500px; height: 500px;"></div>
     </div>
     <div class="col-md-6">
-      <%= form_for @csv_form, url: { action: 'upload_list' }, html: { multipart: true, remote: true, authenticity_token: true } do |f| %>
+      <%= form_for @upload_form, url: { action: 'upload_list' }, html: { multipart: true, remote: true, authenticity_token: true } do |f| %>
         <div class="control-group">
           <%= f.label :file, :class => 'control-label' %>
           <div class="controls">

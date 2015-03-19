@@ -1,0 +1,30 @@
+<% keys = resources.first.keys.reject {|key| /url/ === key }  %>
+<table class="table table-striped">
+  <thead>
+    <tr>
+      <th></th>
+      <% keys.each do |key| %>
+      <th><%= key %></th>
+      <% end %>
+      <th><%=t '.actions', :default => t("helpers.actions") %></th>
+    </tr>
+  </thead>
+  <tbody>
+    <% @resources.each do |resource| %>
+      <tr>
+        <td><%= link_to cl_image_tag("#{resource['public_id']}.jpg", width: 100, height: 100, crop: :fill),
+                        resource["url"] %></td>
+        <% keys.each do |key| %>
+          <td><%= format_resource_value(key, resource[key]) %></td>
+        <% end %>
+        <td>
+          <%= link_to t('.destroy', :default => t("helpers.links.destroy")),
+                      url_for(action: 'destroy', public_id: resource["public_id"]),
+                      :method => :delete,
+                      :data => { :confirm => t('.confirm', :default => t("helpers.links.confirm", :default => 'Are you sure?')) },
+                      :class => 'btn btn-xs btn-danger' %>
+        </td>
+      </tr>
+    <% end %>
+  </tbody>
+</table>
