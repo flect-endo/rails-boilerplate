@@ -9,6 +9,11 @@ class PicturesController < ApplicationController
   def create
     p " ------------------------ create!"
     p params
+    Cloudinary::Uploader.upload(params[:file])
+    respond_to do |format|
+      format.html { redirect_to pictures_url, notice: 'Image was successfully uploaded.' }
+      format.json { head :created }
+    end
   end
 
   def destroy
