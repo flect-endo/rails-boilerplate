@@ -4,7 +4,7 @@ class AttendancesController < ApplicationController
   before_action :set_user
 
   def index
-    @attendances = @user.attendances
+    @attendances = @user.attendances.includes(:time_entries)
   end
 
   def clock_in
