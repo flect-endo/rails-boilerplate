@@ -61,6 +61,7 @@ gem 'cloudinary'
 
 group :development do
   gem 'letter_opener_web'
+  gem 'bullet'
 end
 
 group :development, :test do
