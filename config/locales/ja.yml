@@ -12,6 +12,7 @@ ja:
     destroy: "削除"
     upload_csv: "CSVアップロード"
     upload_img: "画像アップロード"
+    export_gpx: "GPXエクスポート"
     cancel: "キャンセル"
   helpers:
     actions: "アクション"

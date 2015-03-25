@@ -59,6 +59,7 @@ Rails.application.routes.draw do
   get 'map' => 'map#index'
   post 'map/upload_list'=> 'map#upload_list'
   post 'map/places' => 'map#places'
+  post 'map/export' => 'map#export'
 
   if Rails.env.development?
     mount RailsAdmin::Engine => '/admin', as: 'rails_admin'

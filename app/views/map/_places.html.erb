@@ -18,3 +18,13 @@
     <% end %>
   </tbody>
 </table>
+
+<%= form_for map, url: { action: 'export', format: 'gpx' } do |f| %>
+  <div class="control-group">
+    <%= f.label :tracks, :class => 'control-label' %>
+    <div class="controls">
+      <%= f.text_area :tracks, :class => 'form-control' %>
+    </div>
+  </div>
+  <%= f.submit t("button.export_gpx"), :class => 'btn btn-primary' %>
+<% end %>

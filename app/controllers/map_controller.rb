@@ -19,5 +19,13 @@ class MapController < ApplicationController
 
   def places
     @places = params[:places].map {|place_params| Place.new(place_params[1].permit(:address, :latitude, :longitude)) }
+    @map = Map.new
+  end
+
+  def export
+    @tracks = JSON.parse(params[:map][:tracks])
+    respond_to do |format|
+      format.gpx
+    end
   end
 end

@@ -1,8 +1,6 @@
 <%= content_for :header do %>
     <%= javascript_include_tag "https://maps.googleapis.com/maps/api/js?libraries=geometry&libraries=places&sensor=false" %>
     <script>
-      google.maps.event.addDomListener(window, 'load', initialize);
-
       var map = null;
       var places = [];
       var numOfPlace = 0;
@@ -10,6 +8,11 @@
       var directionsDisplay = new google.maps.DirectionsRenderer({
         draggable: true,
         preserveViewpoint: false
+      });
+
+      google.maps.event.addDomListener(window, 'load', initialize);
+      google.maps.event.addListener(directionsDisplay, 'directions_changed', function() {
+        onDirectionsChanged(directionsDisplay.directions);
       });
 
       function initialize() {
@@ -47,8 +50,7 @@
           numOfPlace += 1;
 
           if (status == google.maps.GeocoderStatus.OK) {
-            console.log(results[0]);
-
+            // console.log(results[0]);
             var location = results[0].geometry.location;
 
             // マーカーを表示 -> ルート計算で表示されるためコメントアウト
@@ -102,6 +104,14 @@
           }
         });
       };
+
+      var onDirectionsChanged = function(directions) {
+        console.log("directions changed.");
+        var paths = directions.routes[0].overview_path.map(function(p) {
+          return { lat: p.lat(), lng: p.lng() };
+        });
+        $("#map_tracks").val(JSON.stringify(paths));
+      }
     </script>
 <% end %>
 

@@ -1,1 +1,2 @@
-$("#places").html('<%= j render partial: "places", locals: { places: @places } %>');
+$("#places").html('<%= j render "places", { places: @places, map: @map } %>');
+onDirectionsChanged(directionsDisplay.directions);
