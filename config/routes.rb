@@ -69,7 +69,7 @@ Rails.application.routes.draw do
   post 'map/places' => 'map#places'
   post 'map/export' => 'map#export'
 
-  resources :tracks, only: [:destroy] do
+  resources :tracks, only: [:create, :destroy] do
     member do
       match 'load', via: [:get, :post]
     end

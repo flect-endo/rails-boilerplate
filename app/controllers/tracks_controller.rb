@@ -1,5 +1,10 @@
 class TracksController < ApplicationController
-  before_action :set_track
+  before_action :set_track, except: [:create]
+
+  def create
+    Track.create!(trackpoints: params[:map][:tracks])
+    @tracks = Track.all
+  end
 
   def load
     @trackpoints = JSON.parse(@track.trackpoints)

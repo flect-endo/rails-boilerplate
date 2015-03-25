@@ -28,3 +28,20 @@
   </div>
   <%= f.submit t("button.export_gpx"), :class => 'btn btn-primary' %>
 <% end %>
+
+<%= link_to t('.new', :default => t("helpers.links.create")),
+            { controller: 'tracks', action: 'create' },
+            :remote => true,
+            :id => 'create_track',
+            :class => 'btn btn-primary' %>
+
+<script>
+$("#create_track").click(function() {
+  $.ajax({
+    url: $(this).attr("href"),
+    type: 'post',
+    data: $("#new_map").serialize()
+  });
+  return false;
+});
+</script>

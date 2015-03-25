@@ -8,6 +8,7 @@ class MapController < ApplicationController
     @tracks = Track.all
   end
 
+  # 地名の書かれたCSVファイルをアップロード
   def upload_list
     form = UploadForm.new(params[:upload_form])
 
@@ -18,14 +19,15 @@ class MapController < ApplicationController
     end
   end
 
+  # 紹介した地名情報を一覧表示
   def places
     @places = params[:places].map {|place_params| Place.new(place_params[1].permit(:address, :latitude, :longitude)) }
     @map = Map.new
   end
 
+  # ルート情報をエクスポートする
   def export
     @tracks = JSON.parse(params[:map][:tracks])
-    Track.create!(trackpoints: params[:map][:tracks])
     respond_to do |format|
       format.gpx
     end
