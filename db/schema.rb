@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20150317014752) do
+ActiveRecord::Schema.define(version: 20150325071736) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -63,6 +63,10 @@ ActiveRecord::Schema.define(version: 20150317014752) do
     t.integer  "attendance_id", null: false
     t.datetime "started_at"
     t.datetime "ended_at"
+  end
+
+  create_table "tracks", force: :cascade do |t|
+    t.text "trackpoints", default: "", null: false
   end
 
   create_table "user_checklists", force: :cascade do |t|

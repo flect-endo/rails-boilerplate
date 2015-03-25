@@ -5,6 +5,7 @@ class MapController < ApplicationController
 
   def index
     @upload_form = UploadForm.new
+    @tracks = Track.all
   end
 
   def upload_list
@@ -24,6 +25,7 @@ class MapController < ApplicationController
 
   def export
     @tracks = JSON.parse(params[:map][:tracks])
+    Track.create!(trackpoints: params[:map][:tracks])
     respond_to do |format|
       format.gpx
     end

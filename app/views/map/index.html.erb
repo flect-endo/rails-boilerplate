@@ -121,6 +121,30 @@
   <div class="row">
     <div class="col-md-6">
       <div id="map" data-tap-disabled="true" style="width: 500px; height: 500px;"></div>
+
+      <h2>ルート情報</h2>
+      <table class="table table-striped">
+        <thead>
+          <tr>
+            <th></th>
+            <th><%= Track.human_attribute_name(:trackpoints) %></th>
+            <th></th>
+          </tr>
+        </thead>
+        <tbody>
+          <% @tracks.each_with_index do |track, index| %>
+            <tr>
+              <td><%= index + 1 %></td>
+              <td><%= track.size %></td>
+              <td>
+                <%= link_to t('.import', :default => t("helpers.links.import")),
+                    import_track_path(track), remote: true, class: 'btn btn-default btn-xs' %>
+              </td>
+            </tr>
+          <% end %>
+        </tbody>
+      </table>
+
     </div>
     <div class="col-md-6">
       <%= form_for @upload_form, url: { action: 'upload_list' }, html: { multipart: true, remote: true, authenticity_token: true } do |f| %>

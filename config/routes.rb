@@ -1,4 +1,12 @@
 Rails.application.routes.draw do
+  get 'tracks/destroy'
+
+  get 'tracks/import'
+
+  get 'track/destroy'
+
+  get 'track/import'
+
   get 'pictures/index'
 
   root 'home#index'
@@ -60,6 +68,12 @@ Rails.application.routes.draw do
   post 'map/upload_list'=> 'map#upload_list'
   post 'map/places' => 'map#places'
   post 'map/export' => 'map#export'
+
+  resources :tracks, only: [:destroy] do
+    member do
+      match 'import', via: [:get, :post]
+    end
+  end
 
   if Rails.env.development?
     mount RailsAdmin::Engine => '/admin', as: 'rails_admin'
