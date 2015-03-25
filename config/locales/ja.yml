@@ -32,7 +32,7 @@ ja:
       destroy: "削除"
       destroy_all: "全件削除"
       new_report: "新規レポート"
-      import: "インポート"
+      load: "読み込み"
       report: "レポート"
       start_work: "作業開始"
       end_work: "作業終了"

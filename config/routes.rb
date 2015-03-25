@@ -71,7 +71,7 @@ Rails.application.routes.draw do
 
   resources :tracks, only: [:destroy] do
     member do
-      match 'import', via: [:get, :post]
+      match 'load', via: [:get, :post]
     end
   end
 
