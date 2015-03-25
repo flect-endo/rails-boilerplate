@@ -22,12 +22,13 @@ class MapController < ApplicationController
   # 紹介した地名情報を一覧表示
   def places
     @places = params[:places].map {|place_params| Place.new(place_params[1].permit(:address, :latitude, :longitude)) }
-    @map = Map.new
+    @track = Track.new
   end
 
   # ルート情報をエクスポートする
   def export
-    @tracks = JSON.parse(params[:map][:tracks])
+    track_params = params.require(:track).permit(:trackpoints)
+    @track = Track.new(trackpoints: JSON.parse(track_params[:trackpoints]))
     respond_to do |format|
       format.gpx
     end

@@ -1,6 +1,8 @@
 class Track < ActiveRecord::Base
 
+  serialize :trackpoints
+
   def size
-    JSON.parse(trackpoints).size
+    trackpoints.size
   end
 end

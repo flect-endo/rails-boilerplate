@@ -1,6 +1,6 @@
 require 'csv'
 CSV.generate do |csv|
-  @tracks.each do |track|
-    csv << [track["lat"], track["lng"]]
+  @track.trackpoints.each do |trackpoint|
+    csv << [trackpoint["lat"], trackpoint["lng"]]
   end
 end

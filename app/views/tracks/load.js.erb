@@ -1,7 +1,7 @@
 console.log("imported!");
 
 var coordinates = [];
-<% @trackpoints.each do |trackpoint| %>
+<% @track.trackpoints.each do |trackpoint| %>
   coordinates.push(new google.maps.LatLng(<%= trackpoint["lat"] %>, <%= trackpoint["lng"] %>));
 <% end %>
 
