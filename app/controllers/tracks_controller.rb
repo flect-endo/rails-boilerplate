@@ -18,7 +18,8 @@ class TracksController < ApplicationController
       @track = Track.new(trackpoints: JSON.parse(track_params[:trackpoints]))
     end
     respond_to do |format|
-      format.gpx
+      format.csv
+      format.gpx { send_data @track.to_gpx }
     end
   end
 
