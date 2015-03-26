@@ -67,11 +67,14 @@ Rails.application.routes.draw do
   get 'map' => 'map#index'
   post 'map/upload_list'=> 'map#upload_list'
   post 'map/places' => 'map#places'
-  post 'map/export' => 'map#export'
 
   resources :tracks, only: [:create, :destroy] do
+    collection do
+      post 'export'
+    end
     member do
       match 'load', via: [:get, :post]
+      get 'export'
     end
   end
 

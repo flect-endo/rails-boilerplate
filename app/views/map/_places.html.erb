@@ -19,7 +19,7 @@
   </tbody>
 </table>
 
-<%= form_for track, url: { action: 'export', format: 'gpx' } do |f| %>
+<%= form_for track, url: { controller: 'tracks', action: 'export', format: 'gpx' } do |f| %>
   <div class="control-group">
     <%= f.label :trackpoints, :class => 'control-label' %>
     <div class="controls">

@@ -34,6 +34,7 @@ ja:
       new_report: "新規レポート"
       load: "読み込み"
       report: "レポート"
+      export: "エクスポート"
       start_work: "作業開始"
       end_work: "作業終了"
       start_task: "開始"

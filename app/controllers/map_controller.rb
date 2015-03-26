@@ -24,13 +24,4 @@ class MapController < ApplicationController
     @places = params[:places].map {|place_params| Place.new(place_params[1].permit(:address, :latitude, :longitude)) }
     @track = Track.new
   end
-
-  # ルート情報をエクスポートする
-  def export
-    track_params = params.require(:track).permit(:trackpoints)
-    @track = Track.new(trackpoints: JSON.parse(track_params[:trackpoints]))
-    respond_to do |format|
-      format.gpx
-    end
-  end
 end
