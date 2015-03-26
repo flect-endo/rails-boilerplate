@@ -1,5 +1,12 @@
 class TracksController < ApplicationController
-  before_action :set_track, except: [:create, :export]
+  before_action :set_track, except: [:index, :create, :export]
+
+  def index
+    @tracks = Track.all
+  end
+
+  def show
+  end
 
   def create
     track = Track.new(track_params)

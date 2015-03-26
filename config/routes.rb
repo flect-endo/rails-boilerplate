@@ -58,7 +58,7 @@ Rails.application.routes.draw do
   post 'map/upload_list'=> 'map#upload_list'
   post 'map/places' => 'map#places'
 
-  resources :tracks, only: [:create, :destroy] do
+  resources :tracks, only: [:index, :show, :create, :destroy] do
     collection do
       post 'export'
     end
