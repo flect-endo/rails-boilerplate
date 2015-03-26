@@ -5,8 +5,10 @@ class MapController < ApplicationController
 
   def index
     @upload_form = UploadForm.new
+    @tracks = Track.all
   end
 
+  # 地名の書かれたCSVファイルをアップロード
   def upload_list
     form = UploadForm.new(params[:upload_form])
 
@@ -17,7 +19,9 @@ class MapController < ApplicationController
     end
   end
 
+  # 紹介した地名情報を一覧表示
   def places
     @places = params[:places].map {|place_params| Place.new(place_params[1].permit(:address, :latitude, :longitude)) }
+    @track = Track.new
   end
 end

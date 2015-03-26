@@ -59,6 +59,10 @@ gem 'remotipart'
 # cloudinary
 gem 'cloudinary'
 
+# Map
+gem 'gpx'
+gem 'libxml-ruby'
+
 group :development do
   gem 'letter_opener_web'
   gem 'bullet'

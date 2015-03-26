@@ -12,6 +12,7 @@ ja:
     destroy: "削除"
     upload_csv: "CSVアップロード"
     upload_img: "画像アップロード"
+    export_gpx: "GPXエクスポート"
     cancel: "キャンセル"
   helpers:
     actions: "アクション"
@@ -26,12 +27,15 @@ ja:
       new: "新規"
       create: "作成"
       back: "戻る"
+      close: "閉じる"
       show: "詳細"
       edit: "編集"
       destroy: "削除"
       destroy_all: "全件削除"
       new_report: "新規レポート"
+      load: "読み込み"
       report: "レポート"
+      export: "エクスポート"
       start_work: "作業開始"
       end_work: "作業終了"
       start_task: "開始"
@@ -102,6 +106,10 @@ ja:
       checklist:
         title: "項目"
         created_at: *created_at
+      track:
+        id: *id
+        trackpoints: "トラックポイント"
+        line_color: "表示色"
       place:
         address: "住所"
         latitude: "緯度"

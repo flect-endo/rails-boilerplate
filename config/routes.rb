@@ -1,6 +1,4 @@
 Rails.application.routes.draw do
-  get 'pictures/index'
-
   root 'home#index'
 
   get 'home/index'
@@ -59,6 +57,16 @@ Rails.application.routes.draw do
   get 'map' => 'map#index'
   post 'map/upload_list'=> 'map#upload_list'
   post 'map/places' => 'map#places'
+
+  resources :tracks, only: [:create, :destroy] do
+    collection do
+      post 'export'
+    end
+    member do
+      match 'load', via: [:get, :post]
+      get 'export'
+    end
+  end
 
   if Rails.env.development?
     mount RailsAdmin::Engine => '/admin', as: 'rails_admin'

@@ -1,0 +1,18 @@
+console.log("imported!");
+
+var coordinates = [];
+<% @track.trackpoints.each do |trackpoint| %>
+  coordinates.push(new google.maps.LatLng(<%= trackpoint["lat"] %>, <%= trackpoint["lng"] %>));
+<% end %>
+
+var path = new google.maps.Polyline({
+  path: coordinates,
+  geodesic: true,
+  strokeColor: "<%= @track.line_color %>",
+  strokeOpacity: 0.5,
+  strokeWeight: 10
+});
+
+path.setMap(map);
+
+$("#modal<%= @track.id %>").modal('hide');

@@ -18,3 +18,42 @@
     <% end %>
   </tbody>
 </table>
+
+<%= form_for track, url: { controller: 'tracks', action: 'export', format: 'gpx' } do |f| %>
+  <div class="control-group">
+    <%= f.label :trackpoints, :class => 'control-label' %>
+    <div class="controls">
+      <%= f.text_area :trackpoints, :class => 'form-control' %>
+    </div>
+  </div>
+  <%= f.submit t("button.export_gpx"), :class => 'btn btn-primary' %>
+<% end %>
+
+<%= link_to t('.new', :default => t("helpers.links.create")),
+            { controller: 'tracks', action: 'create' },
+            :remote => true,
+            :id => 'create_track',
+            :class => 'btn btn-primary' %>
+
+<script>
+$("#create_track").click(function() {
+  // 配列を Ajax で POST して Rails で配列として処理させたい場合、
+  // - contentType: 'application/json' を付ける
+  // - data として JSON.stringify した文字列を渡す
+  // Object や Array を渡した場合は jQuery が $.param で
+  // シリアライズする jQuery API の仕様で
+  // { "0" => ..., "1" => ... } のようなハッシュになるのを回避。
+  var data = {
+    track: {
+      trackpoints: JSON.parse($("#track_trackpoints").val())
+    }
+  };
+  $.ajax({
+    url: $(this).attr("href"),
+    type: 'post',
+    contentType: 'application/json',
+    data: JSON.stringify(data)
+  });
+  return false;
+});
+</script>
