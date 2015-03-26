@@ -2,6 +2,8 @@ require 'gpx'
 class Track < ActiveRecord::Base
   serialize :trackpoints
 
+  attr_accessor :line_color
+
   def size
     trackpoints.size
   end

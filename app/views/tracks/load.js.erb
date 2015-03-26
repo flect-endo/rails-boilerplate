@@ -8,9 +8,11 @@ var coordinates = [];
 var path = new google.maps.Polyline({
   path: coordinates,
   geodesic: true,
-  strokeColor: "#0000FF",
+  strokeColor: "<%= @track.line_color %>",
   strokeOpacity: 0.5,
   strokeWeight: 10
 });
 
 path.setMap(map);
+
+$("#modal<%= @track.id %>").modal('hide');

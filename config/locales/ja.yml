@@ -27,6 +27,7 @@ ja:
       new: "新規"
       create: "作成"
       back: "戻る"
+      close: "閉じる"
       show: "詳細"
       edit: "編集"
       destroy: "削除"
@@ -105,6 +106,10 @@ ja:
       checklist:
         title: "項目"
         created_at: *created_at
+      track:
+        id: *id
+        trackpoints: "トラックポイント"
+        line_color: "表示色"
       place:
         address: "住所"
         latitude: "緯度"

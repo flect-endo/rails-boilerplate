@@ -8,6 +8,7 @@ class TracksController < ApplicationController
   end
 
   def load
+    @track.line_color = params[:track][:line_color]
   end
 
   def export

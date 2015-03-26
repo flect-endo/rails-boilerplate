@@ -2,7 +2,7 @@
 <table class="table table-striped">
   <thead>
     <tr>
-      <th></th>
+      <th><%= Track.human_attribute_name(:id) %></th>
       <th><%= Track.human_attribute_name(:trackpoints) %></th>
       <th></th>
     </tr>
@@ -13,8 +13,10 @@
         <td><%= track.id %></td>
         <td><%= track.trackpoints.size %></td>
         <td>
-          <%= link_to t('.load', :default => t("helpers.links.load")),
-              load_track_path(track), remote: true, class: 'btn btn-default btn-xs' %>
+          <button type="button" class="btn btn-primary btn-xs" data-toggle="modal" data-target="#modal<%= track.id %>">
+            <%= t('.load', :default => t("helpers.links.load")) %>
+          </button>
+          <%= render "tracks/load_modal", { track: track } %>
           <%= link_to t('.export', :default => t("helpers.links.export")),
               export_track_path(track, format: 'gpx'), class: 'btn btn-default btn-xs' %>
           <%= link_to t('.destroy', :default => t("helpers.links.destroy")),

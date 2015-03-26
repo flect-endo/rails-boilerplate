@@ -1,0 +1,26 @@
+<div class="modal fade" id="modal<%= track.id %>" tabindex="-1" role="dialog" aria-hidden="true">
+  <%= form_for track, url: load_track_path(track), remote: true, html: { method: 'get' } do |f| %>
+  <div class="modal-dialog">
+    <div class="modal-content">
+      <div class="modal-header">
+        <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+        <h4 class="modal-title">ルート読み込み</h4>
+      </div>
+      <div class="modal-body">
+          <div class="control-group">
+            <%= f.label :line_color, :class => 'control-label' %>
+            <div class="controls">
+              <%= f.color_field :line_color, :class => 'form-control' %>
+            </div>
+          </div>
+      </div>
+      <div class="modal-footer">
+        <button type="button" class="btn btn-default" data-dismiss="modal">
+          <%= t("helpers.links.close") %>
+        </button>
+        <%= f.submit t("helpers.links.load"), class: 'btn btn-primary' %>
+      </div>
+    </div>
+  </div>
+  <% end %>
+</div>
