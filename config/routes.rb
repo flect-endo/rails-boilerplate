@@ -1,14 +1,4 @@
 Rails.application.routes.draw do
-  get 'tracks/destroy'
-
-  get 'tracks/import'
-
-  get 'track/destroy'
-
-  get 'track/import'
-
-  get 'pictures/index'
-
   root 'home#index'
 
   get 'home/index'
