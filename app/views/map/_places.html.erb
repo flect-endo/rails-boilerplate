@@ -37,10 +37,22 @@
 
 <script>
 $("#create_track").click(function() {
+  // 配列を Ajax で POST して Rails で配列として処理させたい場合、
+  // - contentType: 'application/json' を付ける
+  // - data として JSON.stringify した文字列を渡す
+  // Object や Array を渡した場合は jQuery が $.param で
+  // シリアライズする jQuery API の仕様で
+  // { "0" => ..., "1" => ... } のようなハッシュになるのを回避。
+  var data = {
+    track: {
+      trackpoints: JSON.parse($("#track_trackpoints").val())
+    }
+  };
   $.ajax({
     url: $(this).attr("href"),
     type: 'post',
-    data: $("#new_track").serialize()
+    contentType: 'application/json',
+    data: JSON.stringify(data)
   });
   return false;
 });

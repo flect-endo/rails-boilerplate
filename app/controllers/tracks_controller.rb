@@ -2,7 +2,8 @@ class TracksController < ApplicationController
   before_action :set_track, except: [:create]
 
   def create
-    Track.create!(trackpoints: JSON.parse(params[:track][:trackpoints]))
+    track = Track.new(track_params)
+    track.save
     @tracks = Track.all
   end
 
@@ -18,5 +19,9 @@ class TracksController < ApplicationController
 
   def set_track
     @track = Track.find(params[:id])
+  end
+
+  def track_params
+    params.require(:track).permit(trackpoints: ["lat", "lng"])
   end
 end

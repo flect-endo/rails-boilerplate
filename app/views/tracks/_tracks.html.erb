@@ -10,7 +10,7 @@
   <tbody>
     <% tracks.each_with_index do |track, index| %>
       <tr>
-        <td><%= index + 1 %></td>
+        <td><%= track.id %></td>
         <td><%= track.trackpoints.size %></td>
         <td>
           <%= link_to t('.load', :default => t("helpers.links.load")),
