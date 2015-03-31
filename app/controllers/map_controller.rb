@@ -21,7 +21,7 @@ class MapController < ApplicationController
 
   # 紹介した地名情報を一覧表示
   def places
-    @places = params[:places].map {|place_params| Place.new(place_params[1].permit(:address, :latitude, :longitude)) }
+    @places = params[:places].map {|place_params| Place.new(place_params[1].permit(:name, :address, :latitude, :longitude)) }
     @track = Track.new
   end
 end

@@ -2,6 +2,7 @@
   <thead>
     <tr>
       <th>Marker</th>
+      <th><%= Place.human_attribute_name(:name) %></th>
       <th><%= Place.human_attribute_name(:address) %></th>
       <th><%= Place.human_attribute_name(:latitude) %></th>
       <th><%= Place.human_attribute_name(:longitude) %></th>
@@ -11,6 +12,7 @@
     <% places.each_with_index do |place, index| %>
       <tr>
         <td><%= index + 1 %></td>
+        <td><%= place.name %></td>
         <td><%= place.address %></td>
         <td><%= place.latitude %></td>
         <td><%= place.longitude %></td>
