@@ -1,6 +1,7 @@
 require 'gpx'
 class Track < ActiveRecord::Base
   serialize :trackpoints
+  serialize :waypoints
 
   attr_accessor :line_color
 
