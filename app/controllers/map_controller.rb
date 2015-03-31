@@ -21,7 +21,9 @@ class MapController < ApplicationController
 
   # 紹介した地名情報を一覧表示
   def places
-    @places = params[:places].map {|place_params| Place.new(place_params[1].permit(:name, :address, :latitude, :longitude)) }
+    @places = params[:places].map do |place_params|
+      Place.new(place_params[1].permit(:name, :address, :latitude, :longitude))
+    end
     @track = Track.new(name: "My Route", waypoints: @places.to_json(only: [:name, :address, :latitude, :longitude]))
   end
 end
