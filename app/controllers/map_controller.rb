@@ -24,6 +24,9 @@ class MapController < ApplicationController
     @places = params[:places].map do |place_params|
       Place.new(place_params[1].permit(:name, :address, :latitude, :longitude))
     end
-    @track = Track.new(name: "My Route", waypoints: @places.to_json(only: [:name, :address, :latitude, :longitude]))
+
+    @track = Track.new(
+      name: "#{@places.first.name}〜#{@places.last.name}",
+      waypoints: @places.to_json(only: [:name, :address, :latitude, :longitude]))
   end
 end
