@@ -43,6 +43,6 @@ class TracksController < ApplicationController
   end
 
   def track_params
-    params.require(:track).permit(trackpoints: ["lat", "lng"])
+    params.require(:track).permit(:name, waypoints: ["name"], trackpoints: ["lat", "lng"])
   end
 end

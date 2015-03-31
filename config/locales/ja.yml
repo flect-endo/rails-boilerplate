@@ -108,9 +108,12 @@ ja:
         created_at: *created_at
       track:
         id: *id
+        name: "ルート名"
         trackpoints: "トラックポイント"
+        waypoints: "ウェイポイント"
         line_color: "表示色"
       place:
+        name: "名前"
         address: "住所"
         latitude: "緯度"
         longitude: "経度"

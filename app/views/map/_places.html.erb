@@ -23,6 +23,18 @@
 
 <%= form_for track, url: { controller: 'tracks', action: 'export', format: 'gpx' } do |f| %>
   <div class="control-group">
+    <%= f.label :name, :class => 'control-label' %>
+    <div class="controls">
+      <%= f.text_field :name, :class => 'form-control' %>
+    </div>
+  </div>
+  <div class="control-group">
+    <%= f.label :waypoints, :class => 'control-label' %>
+    <div class="controls">
+      <%= f.text_area :waypoints, :class => 'form-control' %>
+    </div>
+  </div>
+  <div class="control-group">
     <%= f.label :trackpoints, :class => 'control-label' %>
     <div class="controls">
       <%= f.text_area :trackpoints, :class => 'form-control' %>
@@ -47,6 +59,8 @@ $("#create_track").click(function() {
   // { "0" => ..., "1" => ... } のようなハッシュになるのを回避。
   var data = {
     track: {
+      name: $("#track_name").val(),
+      waypoints: JSON.parse($("#track_waypoints").val()),
       trackpoints: JSON.parse($("#track_trackpoints").val())
     }
   };
