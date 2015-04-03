@@ -1,10 +1,8 @@
-# coding: utf-8
-require 'kconv'
-
 class MapController < ApplicationController
 
   def index
     @upload_form = UploadForm.new
+    @place = Place.new
     @tracks = Track.all
   end
 
@@ -17,6 +15,10 @@ class MapController < ApplicationController
     form.read_csv do |row|
       @data << row
     end
+  end
+
+  def search_place
+    @name = params[:place][:name]
   end
 
   # 紹介した地名情報を一覧表示

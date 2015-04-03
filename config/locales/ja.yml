@@ -10,6 +10,7 @@ ja:
     create: "作成"
     update: "変更"
     destroy: "削除"
+    search: "検索"
     upload_csv: "CSVアップロード"
     upload_img: "画像アップロード"
     export_gpx: "GPXエクスポート"

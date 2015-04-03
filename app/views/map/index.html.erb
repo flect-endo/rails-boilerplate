@@ -5,10 +5,12 @@
       var places = [];
       var numOfPlace = 0;
       var points = [];
+      var currentPosition = null;
       var directionsDisplay = new google.maps.DirectionsRenderer({
         draggable: true,
         preserveViewpoint: false
       });
+      var geocoder = new google.maps.Geocoder();
 
       google.maps.event.addDomListener(window, 'load', initialize);
       google.maps.event.addListener(directionsDisplay, 'directions_changed', function() {
@@ -25,6 +27,7 @@
             mapTypeId: google.maps.MapTypeId.ROADMAP
           };
           map = new google.maps.Map($("#map")[0], mapOptions);
+          currentPosition = latlng;
           directionsDisplay.setMap(map);
         };
 
@@ -45,7 +48,6 @@
         var request = {
           address: key
         };
-        var geocoder = new google.maps.Geocoder();
         geocoder.geocode(request, function(results, status) {
           numOfPlace += 1;
 
@@ -132,15 +134,35 @@
       <div id="tracks"><%= render "tracks/tracks", { tracks: @tracks } %></div>
     </div>
     <div class="col-md-6">
-      <%= form_for @upload_form, url: { action: 'upload_list' }, html: { multipart: true, remote: true, authenticity_token: true } do |f| %>
-        <div class="control-group">
-          <%= f.label :file, :class => 'control-label' %>
-          <div class="controls">
-            <%= f.file_field :file, :class => 'form-control' %>
-          </div>
+      <div class="panel panel-default">
+        <div class="panel-heading">CSVファイルから</div>
+        <div class="panel-body">
+          <%= form_for @upload_form, url: { action: 'upload_list' }, html: { multipart: true, remote: true, authenticity_token: true } do |f| %>
+            <div class="control-group">
+              <%= f.label :file, :class => 'control-label' %>
+              <div class="controls">
+                <%= f.file_field :file, :class => 'form-control' %>
+              </div>
+            </div>
+            <%= f.submit t("button.upload_csv"), :class => 'btn btn-primary' %>
+          <% end %>
         </div>
-        <%= f.submit t("button.upload_csv"), :class => 'btn btn-primary' %>
-      <% end %>
+      </div>
+
+      <div class="panel panel-default">
+        <div class="panel-heading">フォームから</div>
+        <div class="panel-body">
+          <%= form_for @place, url: { action: 'search_place' }, html: { remote: true } do |f| %>
+            <div class="control-group">
+              <%= f.label :name, :class => 'control-label' %>
+              <div class="controls">
+                <%= f.text_field :name, :class => 'form-control' %>
+              </div>
+            </div>
+            <%= f.submit t("button.search"), :class => 'btn btn-primary' %>
+          <% end %>
+        </div>
+      </div>
 
       <div id="places"></div>
     </div>

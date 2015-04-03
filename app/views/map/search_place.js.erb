@@ -1,0 +1,21 @@
+console.log("search");
+
+// geocoder.geocode({address: "<%= j @name %>"}, function(results, status) {
+//   console.log(results);
+// });
+
+var placesService = new google.maps.places.PlacesService(map);
+console.log(currentPosition);
+var request = {
+  query: "<%= j @name %>",
+  radius: "500",
+  location: currentPosition
+};
+
+console.log(placesService);
+
+placesService.textSearch(request, function(res, status) {
+  console.log("place search done");
+  console.log(status);
+  console.log(res);
+});

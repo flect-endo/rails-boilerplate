@@ -57,6 +57,7 @@ Rails.application.routes.draw do
   get 'map' => 'map#index'
   post 'map/upload_list'=> 'map#upload_list'
   post 'map/places' => 'map#places'
+  post 'map/search_place' => 'map#search_place'
 
   resources :tracks, only: [:index, :show, :create, :destroy] do
     collection do
