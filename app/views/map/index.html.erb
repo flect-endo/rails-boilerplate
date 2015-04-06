@@ -53,18 +53,10 @@
             // console.log(results[0]);
             var location = results[0].geometry.location;
 
-            // マーカーを表示 -> ルート計算で表示されるためコメントアウト
-            // var marker = new google.maps.Marker({
-            //   position: location,
-            //   title: request.address,
-            //   map: map,
-            //   icon: new google.maps.MarkerImage("http://chart.apis.google.com/chart?chst=d_map_pin_letter&chld="+ (index+1) + "|ff7e73|000000"),
-            //   shadow: new google.maps.MarkerImage("http://chart.apis.google.com/chart?chst=d_map_pin_shadow",null,null, new google.maps.Point(12, 35) )
-            // });
-
             points.push(location);
 
             places.push({
+              name: key,
               address: results[0].formatted_address,
               latitude: location.lat(),
               longitude: location.lng()
@@ -103,6 +95,22 @@
             alert('not found: ' + key);
           }
         });
+      };
+
+      var addWaypoint = function(latitude, longitude, content, chld) {
+        var marker = new google.maps.Marker({
+          position: new google.maps.LatLng(latitude, longitude),
+          title: content,
+          map: map,
+          icon: new google.maps.MarkerImage("http://chart.apis.google.com/chart?chst=d_map_pin_letter&chld="+ chld + "|ff7e73|000000"),
+          shadow: new google.maps.MarkerImage("http://chart.apis.google.com/chart?chst=d_map_pin_shadow",null,null, new google.maps.Point(12, 35) )
+        });
+        google.maps.event.addListener(marker, 'click', function(event) {
+          new google.maps.InfoWindow({
+            content: content
+          }).open(marker.getMap(), marker);
+        });
+        // marker.setMap(map);
       };
 
       var onDirectionsChanged = function(directions) {

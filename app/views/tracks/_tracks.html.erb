@@ -3,6 +3,8 @@
   <thead>
     <tr>
       <th><%= Track.human_attribute_name(:id) %></th>
+      <th><%= Track.human_attribute_name(:name) %></th>
+      <th><%= Track.human_attribute_name(:waypoints) %></th>
       <th><%= Track.human_attribute_name(:trackpoints) %></th>
       <th></th>
     </tr>
@@ -11,6 +13,8 @@
     <% tracks.each_with_index do |track, index| %>
       <tr>
         <td><%= track.id %></td>
+        <td><%= track.name %></td>
+        <td><%= track.waypoints.try(:size) %></td>
         <td><%= track.trackpoints.size %></td>
         <td>
           <button type="button" class="btn btn-primary btn-xs" data-toggle="modal" data-target="#modal<%= track.id %>">

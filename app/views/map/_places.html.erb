@@ -2,6 +2,7 @@
   <thead>
     <tr>
       <th>Marker</th>
+      <th><%= Place.human_attribute_name(:name) %></th>
       <th><%= Place.human_attribute_name(:address) %></th>
       <th><%= Place.human_attribute_name(:latitude) %></th>
       <th><%= Place.human_attribute_name(:longitude) %></th>
@@ -11,6 +12,7 @@
     <% places.each_with_index do |place, index| %>
       <tr>
         <td><%= index + 1 %></td>
+        <td><%= place.name %></td>
         <td><%= place.address %></td>
         <td><%= place.latitude %></td>
         <td><%= place.longitude %></td>
@@ -20,6 +22,18 @@
 </table>
 
 <%= form_for track, url: { controller: 'tracks', action: 'export', format: 'gpx' } do |f| %>
+  <div class="control-group">
+    <%= f.label :name, :class => 'control-label' %>
+    <div class="controls">
+      <%= f.text_field :name, :class => 'form-control' %>
+    </div>
+  </div>
+  <div class="control-group">
+    <%= f.label :waypoints, :class => 'control-label' %>
+    <div class="controls">
+      <%= f.text_area :waypoints, :class => 'form-control' %>
+    </div>
+  </div>
   <div class="control-group">
     <%= f.label :trackpoints, :class => 'control-label' %>
     <div class="controls">
@@ -45,6 +59,8 @@ $("#create_track").click(function() {
   // { "0" => ..., "1" => ... } のようなハッシュになるのを回避。
   var data = {
     track: {
+      name: $("#track_name").val(),
+      waypoints: JSON.parse($("#track_waypoints").val()),
       trackpoints: JSON.parse($("#track_trackpoints").val())
     }
   };

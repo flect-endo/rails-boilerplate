@@ -15,4 +15,9 @@ var path = new google.maps.Polyline({
 
 path.setMap(map);
 
+// マーカーを表示
+<% (@track.waypoints || []).each_with_index do |waypoint, index| %>
+  addWaypoint(<%= waypoint["latitude"] %>, <%= waypoint["longitude"] %>, '<%= waypoint["name"] || "" %>', <%= index+1 %>);
+<% end %>
+
 $("#modal<%= @track.id %>").modal('hide');
